@@ -5,6 +5,10 @@ USING_NS_CC;
 
 Scene* World::createScene()
 {
+    if(DEBUG_MODE) {
+        CCLOG("Create World.");
+    }
+    
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
@@ -101,6 +105,7 @@ void World::update(float delta)
         ++itP;
     }
     
+    this->checkGameOver();
 }
 
 // Create Node
@@ -119,4 +124,32 @@ void World::createNode(LivingThings* L)
     L->drawNode->drawDot(Vec2(L->cx, L->cy), L->size, L->color);
         
     L->createDistination(_winSize);
+}
+
+void World::checkGameOver()
+{
+    unsigned long numP = P.size();
+    unsigned long numH = H.size();
+    unsigned long numC = C.size();
+    
+    if( numP <= 0 || numH <= 0 || numC <= 0) {
+        Label* gameOver = Label::createWithSystemFont("Game Over", "HiraKakuProN-W6", 60);
+        gameOver->setPosition(Vec2(_winSize.width/2, _winSize.height/2));
+        this->addChild(gameOver, 10);
+        
+        Label* labelRetry = Label::createWithSystemFont("Retry?", "HiraKakuProN-W6", 60);
+        MenuItemLabel* retry = MenuItemLabel::create(labelRetry, CC_CALLBACK_1(World::onRetryPressed,this));
+        Menu* menu = Menu::create(retry, NULL);
+        menu->setPosition(Vec2(_winSize.width/2, _winSize.height/2 - (gameOver->getContentSize().height+50)));
+        this->addChild(menu, 10);
+        
+        this->pause();
+    }
+}
+
+void World::onRetryPressed(Ref* sender)
+{
+    Director* director = Director::getInstance();
+    Scene* world = (Scene*) World::createScene();
+    director->replaceScene(world);
 }

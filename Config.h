@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include "cocos2d.h"
 
+#define DEBUG_MODE true
+
 // Living Things max~min lifes
 #define P_MIN_LIFE 7000
 #define P_MAX_LIFE 8000
