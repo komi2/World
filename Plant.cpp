@@ -8,17 +8,5 @@
 
 #include "Plant.h"
 
-void Plant::aging(Plant* pL, std::list<Plant *> P)
-{
-    --life;
-    if(life < 0) {
-        
-        delete pL;
-        P.erase(pL);
-    }
-}
-
-void Plant::createSight()
-{
-}
+void Plant::createSight() {}
 

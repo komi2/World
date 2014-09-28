@@ -9,9 +9,9 @@
 
 USING_NS_CC;
 
-void Herbivore::eat(std::list<Plant*> &P)
+void Herbivore::eat(std::list<LivingThings*> &P)
 {
-    std::list<Plant *>::iterator itP = P.begin();
+    std::list<LivingThings *>::iterator itP = P.begin();
     while(itP != P.end()) {
         
         float dx = (*itP)->cx - cx;

@@ -11,6 +11,15 @@
 #include <stdio.h>
 #include "cocos2d.h"
 
+// Living Things max~min lifes
+#define P_MIN_LIFE 7000
+#define P_MAX_LIFE 8000
+#define H_MIN_LIFE 4000
+#define H_MAX_LIFE 5000
+#define C_MIN_LIFE 5000
+#define C_MAX_LIFE 6000
+
+
 enum zOrder
 {
     zBackground,

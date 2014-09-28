@@ -3,14 +3,19 @@
 
 USING_NS_CC;
 
-void LivingThings::aging(LivingThings* pL)
+void LivingThings::eat(std::list<LivingThings*> &L) {}
+
+std::list<LivingThings *>::iterator
+LivingThings::aging(std::list<LivingThings *>::iterator itL, std::list<LivingThings*> &L)
 {
-    --life;
     if(life < 0) {
 
-        delete pL;
-
+        delete *itL;
+        return L.erase(itL);
     }
+    
+    --life;
+    return itL;
 }
 
 void LivingThings::randomWalk(Size winSize)

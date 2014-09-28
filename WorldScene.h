@@ -19,13 +19,13 @@ public:
     LivingThings *L;
     
     // Carnivore
-    std::list<Carnivore*> C;
+    std::list<LivingThings*> C;
     
     // Herbivore
-    std::list<Herbivore*> H;
+    std::list<LivingThings*> H;
     
     // Plant
-    std::list<Plant*> P;
+    std::list<LivingThings*> P;
 
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -33,6 +33,8 @@ public:
     virtual void update(float delta);
 
     void createNode(LivingThings* L);
+    
+    void aging(LivingThings* L);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);

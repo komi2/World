@@ -49,19 +49,19 @@ bool World::init()
         H.push_back(new Herbivore);
     
     
-    std::list<Plant *>::iterator itP = P.begin();
+    std::list<LivingThings *>::iterator itP = P.begin();
     while(itP != P.end()) {
         this->createNode((*itP));
         ++itP;
     }
 
-    std::list<Carnivore *>::iterator itC = C.begin();
+    std::list<LivingThings *>::iterator itC = C.begin();
     while(itC != C.end()) {
         this->createNode((*itC));
         ++itC;
     }
 
-    std::list<Herbivore *>::iterator itH = H.begin();
+    std::list<LivingThings *>::iterator itH = H.begin();
     while(itH != H.end()) {
         this->createNode((*itH));
         ++itH;
@@ -76,26 +76,31 @@ bool World::init()
 // Game Loop
 void World::update(float delta)
 {
-    std::list<Carnivore *>::iterator itC = C.begin();
+    std::list<LivingThings *>::iterator itC = C.begin();
     while(itC != C.end()) {
-        //(*itC)->aging();
         (*itC)->randomWalk(_winSize);
         (*itC)->eat(H);
+        
+        itC = (*itC)->aging(itC, C);
         ++itC;
     }
     
-    std::list<Herbivore *>::iterator itH = H.begin();
+    std::list<LivingThings *>::iterator itH = H.begin();
     while(itH != H.end()) {
-        //(*itH)->aging();
         (*itH)->randomWalk(_winSize);
         (*itH)->eat(P);
+        
+        itH = (*itH)->aging(itH, H);
         ++itH;
     }
     
-    std::list<Plant *>::iterator itP = P.begin();
+    std::list<LivingThings *>::iterator itP = P.begin();
     while(itP != P.end()) {
-        (*itP)->aging((*itP), P);
+        
+        itP = (*itP)->aging(itP, P);
+        ++itP;
     }
+    
 }
 
 // Create Node

@@ -10,19 +10,24 @@
 #define __CARNIVORE_H__
 
 #include "LivingThings.h"
-#include "Herbivore.h"
 
 class Carnivore : public LivingThings
 {
 public:
-    void eat(std::list<Herbivore *> &H);
-    
     Carnivore() {
         color = cocos2d::Color4F::RED;
         zOrder = zCarnivore;
         vh = 70;
         vw = 20;
+        life = arc4random() % (C_MAX_LIFE-C_MIN_LIFE) + C_MIN_LIFE;
     }
+    
+    ~Carnivore() {
+        drawNode->clear();
+        CCLOG("Carnivore is dead.");
+    }
+    
+    void eat(std::list<LivingThings *> &H);
 };
 
 #endif

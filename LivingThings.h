@@ -15,6 +15,16 @@
 class LivingThings
 {
 public:
+    LivingThings() {
+        color = cocos2d::Color4F::WHITE;
+        
+        size = 6;
+        speed = 1.0f;
+        sex = (arc4random() % 2) ? male : female ;
+    }
+    
+    virtual ~LivingThings() {}
+    
     // Point
     double moves, cx, cy, ux, uy, sx, sy;
     
@@ -33,7 +43,11 @@ public:
     // Draw
     void born();
     
-    void aging(LivingThings* pL);
+    // Aging
+    std::list<LivingThings *>::iterator
+    aging(std::list<LivingThings *>::iterator itL, std::list<LivingThings *> &L);
+    
+    virtual void eat(std::list<LivingThings*> &L);
     
     void createDistination(cocos2d::Size winSize);
     
@@ -42,16 +56,6 @@ public:
     
     // Create sight
     void createSight();
-    
-    LivingThings() {
-        color = cocos2d::Color4F::WHITE;
-
-        size = 6;
-        speed = 1.0f;
-        sex = (arc4random() % 2) ? male : female ;
-        
-        life = arc4random() % 40;
-    }
 };
 
 
