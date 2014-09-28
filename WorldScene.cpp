@@ -78,6 +78,7 @@ void World::update(float delta)
 {
     std::list<Carnivore *>::iterator itC = C.begin();
     while(itC != C.end()) {
+        //(*itC)->aging();
         (*itC)->randomWalk(_winSize);
         (*itC)->eat(H);
         ++itC;
@@ -85,20 +86,26 @@ void World::update(float delta)
     
     std::list<Herbivore *>::iterator itH = H.begin();
     while(itH != H.end()) {
+        //(*itH)->aging();
         (*itH)->randomWalk(_winSize);
         (*itH)->eat(P);
         ++itH;
+    }
+    
+    std::list<Plant *>::iterator itP = P.begin();
+    while(itP != P.end()) {
+        (*itP)->aging((*itP), P);
     }
 }
 
 // Create Node
 void World::createNode(LivingThings* L)
 {
-    int i = L->index;
+//    int i = L->index;
 
     L->drawNode = DrawNode::create();
     L->drawNode->setPosition(Vec2(0, 0));
-    L->drawNode->setTag(i);
+//    L->drawNode->setTag(i);
     this->addChild(L->drawNode, L->zOrder);
         
     float radius = L->size / 2;

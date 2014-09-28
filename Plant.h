@@ -14,6 +14,8 @@
 class Plant : public LivingThings
 {
 public:
+    void aging(Plant* pL, std::list<Plant *> P);
+    
     Plant() {
         color = cocos2d::Color4F::GREEN;
         zOrder = zPlant;

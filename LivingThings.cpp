@@ -3,6 +3,16 @@
 
 USING_NS_CC;
 
+void LivingThings::aging(LivingThings* pL)
+{
+    --life;
+    if(life < 0) {
+
+        delete pL;
+
+    }
+}
+
 void LivingThings::randomWalk(Size winSize)
 {
     if(moves > 0) {

@@ -26,5 +26,10 @@ enum initNumber
     initNumP = 30,
 };
 
+enum sex
+{
+    male,
+    female,
+};
 
 #endif

@@ -23,7 +23,7 @@ public:
     
     float speed;
     
-    int size, zOrder, index;
+    int size, zOrder, life, sex;
     
     cocos2d::Color4F color;
 
@@ -32,6 +32,8 @@ public:
     
     // Draw
     void born();
+    
+    void aging(LivingThings* pL);
     
     void createDistination(cocos2d::Size winSize);
     
@@ -46,6 +48,9 @@ public:
 
         size = 6;
         speed = 1.0f;
+        sex = (arc4random() % 2) ? male : female ;
+        
+        life = arc4random() % 40;
     }
 };
 
