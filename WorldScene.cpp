@@ -133,11 +133,11 @@ void World::checkGameOver()
     unsigned long numC = C.size();
     
     if( numP <= 0 || numH <= 0 || numC <= 0) {
-        Label* gameOver = Label::createWithSystemFont("Game Over", "HiraKakuProN-W6", 60);
+        Label* gameOver = Label::createWithSystemFont("Game Over", GAME_FONT, 60);
         gameOver->setPosition(Vec2(_winSize.width/2, _winSize.height/2));
         this->addChild(gameOver, 10);
         
-        Label* labelRetry = Label::createWithSystemFont("Retry?", "HiraKakuProN-W6", 60);
+        Label* labelRetry = Label::createWithSystemFont("Retry?", GAME_FONT, 60);
         MenuItemLabel* retry = MenuItemLabel::create(labelRetry, CC_CALLBACK_1(World::onRetryPressed,this));
         Menu* menu = Menu::create(retry, NULL);
         menu->setPosition(Vec2(_winSize.width/2, _winSize.height/2 - (gameOver->getContentSize().height+50)));

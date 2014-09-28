@@ -11,7 +11,11 @@
 #include <stdio.h>
 #include "cocos2d.h"
 
+// Debug mode management
 #define DEBUG_MODE true
+
+// Setting common font
+#define GAME_FONT "HiraKakuProN-W6"
 
 // Living Things max~min lifes
 #define P_MIN_LIFE 7000
