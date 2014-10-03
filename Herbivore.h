@@ -13,21 +13,17 @@
 
 class Herbivore : public LivingThings
 {
-public:
-    // Status: normal
-    const cocos2d::Color4F NORMAL = CL_NORAML_H;
-    // Status: Old
-    const cocos2d::Color4F OLD = CL_OLD_H;
-    // Status: Breeding
-    const cocos2d::Color4F BREEDING = CL_BREEDING_H;
-    
+public:    
     Herbivore() {
-        color = NORMAL;
+        cNormal = CL_NORAML_H;
+        cOld = CL_OLD_H;
+        cBreeding = CL_BREEDING_H;
         zOrder = zHerbivore;
         vh = 70;
         vw = 50;
         life = arc4random() % (H_MAX_LIFE-H_MIN_LIFE) + H_MIN_LIFE;
         type = lTypeH;
+        color = cNormal;
     }
     
     ~Herbivore() {

@@ -9,9 +9,11 @@ std::list<LivingThings *>::iterator
 LivingThings::aging(std::list<LivingThings *>::iterator itL, std::list<LivingThings*> &L)
 {
     if(life < 0) {
-
         delete *itL;
         return L.erase(itL);
+    } else if ( life == OLD_POINT ) {
+        color = cOld;
+        speed = speed - speed / 3;
     }
 
     --life;

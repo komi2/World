@@ -26,6 +26,11 @@ public:
     
     virtual ~LivingThings() {}
     
+    // Status color
+    cocos2d::Color4F cNormal;
+    cocos2d::Color4F cOld;
+    cocos2d::Color4F cBreeding;
+    
     // Point
     double moves, cx, cy, ux, uy, sx, sy;
     

@@ -40,6 +40,8 @@
 #define CL_BREEDING_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(0, 177, 247))
 #define CL_BREEDING_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(255, 0, 195))
 
+#define OLD_POINT 500
+
 
 enum zOrder
 {
