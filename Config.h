@@ -32,6 +32,9 @@ enum zOrder
     zPlant,
     zHerbivore,
     zCarnivore,
+    zButton,
+    zMenuLayer,
+    zMenuItems
 };
 
 enum initNumber
@@ -39,6 +42,14 @@ enum initNumber
     initNumC = 5,
     initNumH = 40,
     initNumP = 30,
+};
+
+// Type of Living Things
+enum livingThingsType
+{
+    lTypeC,
+    lTypeH,
+    lTypeP,
 };
 
 enum sex

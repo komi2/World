@@ -20,6 +20,7 @@ public:
         vh = 70;
         vw = 20;
         life = arc4random() % (C_MAX_LIFE-C_MIN_LIFE) + C_MIN_LIFE;
+        type = lTypeC;
     }
     
     ~Carnivore() {

@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "cocos2d.h"
 #include "Config.h"
+#include "Global.h"
 
 class LivingThings
 {
@@ -33,7 +34,7 @@ public:
     
     float speed;
     
-    int size, zOrder, life, sex;
+    int size, zOrder, life, sex, type;
     
     cocos2d::Color4F color;
 
@@ -49,10 +50,10 @@ public:
     
     virtual void eat(std::list<LivingThings*> &L);
     
-    void createDistination(cocos2d::Size winSize);
+    void createDistination();
     
     // Moves
-    void randomWalk(cocos2d::Size winSize);
+    void randomWalk();
     
     // Create sight
     void createSight();

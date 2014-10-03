@@ -13,33 +13,36 @@ LivingThings::aging(std::list<LivingThings *>::iterator itL, std::list<LivingThi
         delete *itL;
         return L.erase(itL);
     }
-    
+
     --life;
     return itL;
 }
 
-void LivingThings::randomWalk(Size winSize)
+void LivingThings::randomWalk()
 {
     if(moves > 0) {
         moves--;
         cx += ux;
         cy += uy;
     } else {
-        this->createDistination(winSize);
+        this->createDistination();
     }
     
     drawNode->clear();
     drawNode->drawDot(Vec2(cx, cy), size, color);
-    this->createSight();
+
+    if( G->isVisualList[type] ) {
+        this->createSight();
+    }
 }
 
-void LivingThings::createDistination(Size winSize)
+void LivingThings::createDistination()
 {
     float radius = size / 2;
     
     // Get goal point
-    sx = (arc4random() + (int)radius) % (int)(winSize.width - radius);
-    sy = (arc4random() + (int)radius) % (int)(winSize.height - radius);
+    sx = (arc4random() + (int)radius) % (int)(G->winSize.width - radius);
+    sy = (arc4random() + (int)radius) % (int)(G->winSize.height - radius);
     
     double dx = sx - cx;
     double dy = sy - cy;
@@ -64,5 +67,5 @@ void LivingThings::createSight()
     double RX = (cos(rad) * h) + cx;
     double RY = (sin(rad) * h) + cy;
 
-    //drawNode->drawTriangle(Vec2(cx, cy), Vec2(LX, LY), Vec2(RX, RY), Color4F(1,1,0,0.3));
+    drawNode->drawTriangle(Vec2(cx, cy), Vec2(LX, LY), Vec2(RX, RY), Color4F(1,1,1,0.2));
 }

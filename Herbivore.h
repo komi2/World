@@ -20,6 +20,7 @@ public:
         vh = 70;
         vw = 50;
         life = arc4random() % (H_MAX_LIFE-H_MIN_LIFE) + H_MIN_LIFE;
+        type = lTypeH;
     }
     
     ~Herbivore() {

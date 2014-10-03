@@ -19,6 +19,7 @@ public:
         zOrder = zPlant;
         size = 4;
         life = arc4random() % (P_MAX_LIFE-P_MIN_LIFE) + P_MIN_LIFE;
+        type = lTypeP;
     }
     
     ~Plant() {

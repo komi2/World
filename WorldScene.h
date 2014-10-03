@@ -7,16 +7,25 @@
 #include "Carnivore.h"
 #include "Herbivore.h"
 #include "Plant.h"
+#include "Global.h"
 
 class LivingThings;
 
 class World : public cocos2d::Layer
 {
 public:
+    World() {
+    }
+    
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
-    cocos2d::Size _winSize;
     LivingThings *L;
+    
+    // Menu layer
+    cocos2d::LayerColor* _layerMenu;
+    
+    // Menu Button
+    cocos2d::Menu* _menuBtn;
     
     // Carnivore
     std::list<LivingThings*> C;
@@ -27,10 +36,11 @@ public:
     // Plant
     std::list<LivingThings*> P;
 
-
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
     virtual void update(float delta);
+    
+    void createMenuItems(void);
     
     void checkGameOver(void);
 
@@ -43,6 +53,9 @@ public:
     
     // Events
     void onRetryPressed(cocos2d::Ref* sender);
+    void onMenuPressed(cocos2d::Ref* sender);
+    void onMenuClosePressed(cocos2d::Ref* sender);
+    void onVisualPressed(cocos2d::Ref* sender, int lType);
     
     // implement the "static create()" method manually
     CREATE_FUNC(World);
