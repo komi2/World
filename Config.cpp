@@ -5,8 +5,6 @@
 //  Created by shuhei_komino on 2014/09/15.
 //
 //
-//#include "Config.h"
+#include "Config.h"
 
-//USING_NS_CC;
-
-
+USING_NS_CC;

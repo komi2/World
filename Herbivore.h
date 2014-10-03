@@ -14,8 +14,15 @@
 class Herbivore : public LivingThings
 {
 public:
+    // Status: normal
+    const cocos2d::Color4F NORMAL = CL_NORAML_H;
+    // Status: Old
+    const cocos2d::Color4F OLD = CL_OLD_H;
+    // Status: Breeding
+    const cocos2d::Color4F BREEDING = CL_BREEDING_H;
+    
     Herbivore() {
-        color = cocos2d::Color4F::BLUE;
+        color = NORMAL;
         zOrder = zHerbivore;
         vh = 70;
         vw = 50;

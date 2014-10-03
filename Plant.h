@@ -14,8 +14,13 @@
 class Plant : public LivingThings
 {
 public:
+    // Status: normal
+    const cocos2d::Color4F NORMAL = CL_NORAML_P;
+    // Status: Old
+    const cocos2d::Color4F OLD = CL_OLD_P;
+    
     Plant() {
-        color = cocos2d::Color4F::GREEN;
+        color = NORMAL;
         zOrder = zPlant;
         size = 4;
         life = arc4random() % (P_MAX_LIFE-P_MIN_LIFE) + P_MIN_LIFE;

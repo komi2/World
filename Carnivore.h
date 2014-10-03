@@ -14,8 +14,15 @@
 class Carnivore : public LivingThings
 {
 public:
+    // Status: normal
+    const cocos2d::Color4F NORMAL = CL_NORAML_C;
+    // Status: Old
+    const cocos2d::Color4F OLD = CL_OLD_C;
+    // Status: Breeding
+    const cocos2d::Color4F BREEDING = CL_BREEDING_C;
+    
     Carnivore() {
-        color = cocos2d::Color4F::RED;
+        color = NORMAL;
         zOrder = zCarnivore;
         vh = 70;
         vw = 20;

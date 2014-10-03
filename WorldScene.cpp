@@ -35,7 +35,7 @@ bool World::init()
     G->winSize = Director::getInstance()->getWinSize();
     
     // Create Background
-    LayerColor* layer = LayerColor::create(Color4B(60, 60, 60, 255), G->winSize.width, G->winSize.height);
+    LayerColor* layer = LayerColor::create(WORLD_COLOR, G->winSize.width, G->winSize.height);
     Size layerSize = layer->getContentSize();
     layer->setPosition(Vec2((G->winSize.width-layerSize.width)*.5, (G->winSize.height-layerSize.height)*.5));
     this->addChild(layer, zBackground);
