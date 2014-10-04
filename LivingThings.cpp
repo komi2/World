@@ -3,7 +3,29 @@
 
 USING_NS_CC;
 
-void LivingThings::eat(std::list<LivingThings*> &L) {}
+void LivingThings::eat(std::list<LivingThings*> &tL)
+{
+    std::list<LivingThings *>::iterator itTL = tL.begin();
+    while(itTL != tL.end()) {
+        
+        float dx = (*itTL)->cx - cx;
+        float dy = (*itTL)->cy - cy;
+        float distance = sqrt(dx*dx + dy*dy);
+        
+        // Eat target prey
+        if(distance < size * 2) {
+            
+            // Get nutrition
+            nutrition += (*itTL)->nutrition / NUTRITION_DIV_POINT;
+            
+            // Die
+            delete *itTL;
+            itTL = tL.erase(itTL);
+        }
+        
+        ++itTL;
+    }
+}
 
 bool LivingThings::hunger(std::list<LivingThings *>::iterator &itL, std::list<LivingThings *> &L)
 {

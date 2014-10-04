@@ -30,8 +30,6 @@ public:
         drawNode->clear();
         CCLOG("Carnivore is dead.");
     }
-    
-    void eat(std::list<LivingThings *> &H);
 };
 
 #endif

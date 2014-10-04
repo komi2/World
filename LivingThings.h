@@ -59,7 +59,10 @@ public:
     // Check nutrition
     bool hunger(std::list<LivingThings *>::iterator &itL, std::list<LivingThings *> &L);
     
-    virtual void eat(std::list<LivingThings*> &L);
+    /**
+    @param Target Liging Things
+    */
+    void eat(std::list<LivingThings*> &tL);
     
     void createDistination();
     

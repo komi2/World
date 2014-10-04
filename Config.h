@@ -46,6 +46,9 @@
 // Hunting point
 #define HUNTING_POINT 500
 
+// Nutrition division point
+#define NUTRITION_DIV_POINT 3
+
 
 enum zOrder
 {
