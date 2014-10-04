@@ -106,7 +106,8 @@ void World::update(float delta)
         (*itC)->randomWalk();
         (*itC)->eat(H);
         
-        itC = (*itC)->aging(itC, C);
+        if( (*itC)->hunger(itC, C) ) continue;
+        if( (*itC)->aging(itC, C) ) continue;
         ++itC;
     }
     
@@ -115,14 +116,15 @@ void World::update(float delta)
         (*itH)->randomWalk();
         (*itH)->eat(P);
         
-        itH = (*itH)->aging(itH, H);
+        if( (*itH)->hunger(itH, H) ) continue;
+        if( (*itH)->aging(itH, H) ) continue;
         ++itH;
     }
     
     std::list<LivingThings *>::iterator itP = P.begin();
     while(itP != P.end()) {
         
-        itP = (*itP)->aging(itP, P);
+        if( (*itP)->aging(itP, P) ) continue;
         ++itP;
     }
     

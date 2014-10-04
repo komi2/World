@@ -5,19 +5,37 @@ USING_NS_CC;
 
 void LivingThings::eat(std::list<LivingThings*> &L) {}
 
-std::list<LivingThings *>::iterator
-LivingThings::aging(std::list<LivingThings *>::iterator itL, std::list<LivingThings*> &L)
+bool LivingThings::hunger(std::list<LivingThings *>::iterator &itL, std::list<LivingThings *> &L)
 {
+    // Starvation
+    if(nutrition < 0) {
+        delete *itL;
+        itL = L.erase(itL);
+        ++itL;
+        CCLOG("Starvation");
+        return true;
+    }
+    
+    --nutrition;
+    return false;
+}
+
+bool LivingThings::aging(std::list<LivingThings *>::iterator &itL, std::list<LivingThings*> &L)
+{
+    // Die a Natural death
     if(life < 0) {
         delete *itL;
-        return L.erase(itL);
+        itL = L.erase(itL);
+        ++itL;
+        CCLOG("Natural death");
+        return true;
     } else if ( life == OLD_POINT ) {
         color = cOld;
         speed = speed - speed / 3;
     }
 
     --life;
-    return itL;
+    return false;
 }
 
 void LivingThings::randomWalk()
@@ -31,6 +49,9 @@ void LivingThings::randomWalk()
     }
     
     drawNode->clear();
+    
+    // Hunting mode
+    if(hunting) drawNode->drawDot(Vec2(cx, cy), size + 1, Color4F::WHITE);
     drawNode->drawDot(Vec2(cx, cy), size, color);
 
     if( G->isVisualList[type] ) {

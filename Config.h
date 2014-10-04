@@ -34,13 +34,17 @@
 #define CL_NORAML_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(229, 0, 65))
 // Status Old
 #define CL_OLD_P cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(119, 135, 1))
-#define CL_OLD_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(7, 73, 127))
+#define CL_OLD_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(33, 83, 124))
 #define CL_OLD_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(127, 0, 14))
 // Status Breeding
 #define CL_BREEDING_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(0, 177, 247))
 #define CL_BREEDING_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(255, 0, 195))
 
+// turning point
 #define OLD_POINT 500
+
+// Hunting point
+#define HUNTING_POINT 500
 
 
 enum zOrder

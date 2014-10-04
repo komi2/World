@@ -22,6 +22,8 @@ public:
         size = 6;
         speed = 1.0f;
         sex = (arc4random() % 2) ? male : female ;
+        hunting = false;
+        nutrition = 2000;
     }
     
     virtual ~LivingThings() {}
@@ -39,7 +41,9 @@ public:
     
     float speed;
     
-    int size, zOrder, life, sex, type;
+    int size, zOrder, life, sex, type, nutrition;
+    
+    bool hunting;
     
     cocos2d::Color4F color;
 
@@ -50,8 +54,10 @@ public:
     void born();
     
     // Aging
-    std::list<LivingThings *>::iterator
-    aging(std::list<LivingThings *>::iterator itL, std::list<LivingThings *> &L);
+    bool aging(std::list<LivingThings *>::iterator &itL, std::list<LivingThings *> &L);
+    
+    // Check nutrition
+    bool hunger(std::list<LivingThings *>::iterator &itL, std::list<LivingThings *> &L);
     
     virtual void eat(std::list<LivingThings*> &L);
     
