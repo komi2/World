@@ -215,6 +215,10 @@ void World::onMenuPressed(Ref* sender)
 
 void World::onRetryPressed(Ref* sender)
 {
+    // Reset global data
+    delete G;
+    G = new Global;
+    
     Director* director = Director::getInstance();
     Scene* world = (Scene*) World::createScene();
     director->replaceScene(world);
