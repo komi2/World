@@ -19,17 +19,21 @@ public:
         cOld = CL_OLD_P;
         zOrder = zPlant;
         size = 4;
-        life = arc4random() % (P_MAX_LIFE-P_MIN_LIFE) + P_MIN_LIFE;
+        endLife = arc4random() % (MAX_LIFE_P-MIN_LIFE_P) + MIN_LIFE_P;
         type = lTypeP;
         color = cNormal;
     }
     
     ~Plant() {
         drawNode->clear();
+        G->eraseTarget(this, G->breedingFemaleMap[type]);
         CCLOG("Plant is dead.");
     }
     
     void createSight();
+    
+    // Get instance
+    LivingThings* getInstance();
 };
 
 #endif

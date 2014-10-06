@@ -10,3 +10,7 @@
 
 void Plant::createSight() {}
 
+LivingThings* Plant::getInstance()
+{
+    return new LivingThings;
+}

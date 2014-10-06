@@ -8,3 +8,8 @@
 #include "Carnivore.h"
 
 USING_NS_CC;
+
+LivingThings* Carnivore::getInstance()
+{
+    return new Carnivore;
+}

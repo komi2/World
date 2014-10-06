@@ -16,22 +16,12 @@ class World : public cocos2d::Layer
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
-    LivingThings *L;
     
     // Menu layer
     cocos2d::LayerColor* _layerMenu;
     
     // Menu Button
     cocos2d::Menu* _menuBtn;
-    
-    // Carnivore
-    std::list<LivingThings*> C;
-    
-    // Herbivore
-    std::list<LivingThings*> H;
-    
-    // Plant
-    std::list<LivingThings*> P;
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
@@ -42,8 +32,6 @@ public:
     void checkGameOver(void);
 
     void createNode(LivingThings* L);
-    
-    void aging(LivingThings* L);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);

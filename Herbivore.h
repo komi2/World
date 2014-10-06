@@ -21,15 +21,23 @@ public:
         zOrder = zHerbivore;
         vh = 70;
         vw = 50;
-        life = arc4random() % (H_MAX_LIFE-H_MIN_LIFE) + H_MIN_LIFE;
+        endLife = arc4random() % (MAX_LIFE_H-MIN_LIFE_H) + MIN_LIFE_H;
+        breedableAmount = arc4random() % (BREEDING_MAX_AMOUNT_H-BREEDING_MIN_AMOUNT_H) + BREEDING_MIN_AMOUNT_H;
         type = lTypeH;
+        targetType = lTypeP;
         color = cNormal;
+        normalSpeed = NORMAL_SPPED_H;
+        runningSpeed = RUNNING_SPEED_H;
     }
     
     ~Herbivore() {
         drawNode->clear();
+        G->eraseTarget(this, G->breedingFemaleMap[type]);
         CCLOG("Herbivore is dead.");
     }
+    
+    // Get instance
+    LivingThings* getInstance();
 };
 
 #endif

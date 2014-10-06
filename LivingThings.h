@@ -22,8 +22,7 @@ public:
         size = 6;
         speed = 1.0f;
         sex = (arc4random() % 2) ? male : female ;
-        hunting = false;
-        nutrition = 2000;
+        nutrition = 4000;
     }
     
     virtual ~LivingThings() {}
@@ -33,38 +32,48 @@ public:
     cocos2d::Color4F cOld;
     cocos2d::Color4F cBreeding;
     
+    sexType sex;
+    livingThingsType type, targetType;
+    
+    LivingThings* breedingTarget;
+    
     // Point
     double moves, cx, cy, ux, uy, sx, sy;
     
     // Viewing angle
     double vh, vw;
     
-    float speed;
+    float speed, normalSpeed, runningSpeed;
     
-    int size, zOrder, life, sex, type, nutrition;
+    int size, zOrder, life, endLife, nutrition, eatingAmount, breededAmount, breedableAmount;
     
-    bool hunting;
+    bool hunting = false,
+         activity = true;
     
     cocos2d::Color4F color;
 
     // Node
     cocos2d::DrawNode* drawNode;
     
+    // Get instance
+    virtual LivingThings* getInstance();
+    
     // Draw
     void born();
     
     // Aging
-    bool aging(std::list<LivingThings *>::iterator &itL, std::list<LivingThings *> &L);
+    bool aging(std::list<LivingThings *>::iterator &itL);
     
     // Check nutrition
-    bool hunger(std::list<LivingThings *>::iterator &itL, std::list<LivingThings *> &L);
+    bool hunger(std::list<LivingThings *>::iterator &itL);
     
-    /**
-    @param Target Liging Things
-    */
-    void eat(std::list<LivingThings*> &tL);
+    void breeding();
     
-    void createDistination();
+    void crossbreeding(LivingThings* L, LivingThings* tL);
+    
+    void eat();
+    
+    void createDistination(bool isRandom);
     
     // Moves
     void randomWalk();

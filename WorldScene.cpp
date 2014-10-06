@@ -17,6 +17,8 @@ Scene* World::createScene()
 
     // add layer as a child to scene
     scene->addChild(layer);
+    
+    G->world = scene;
 
     // return the scene
     return scene;
@@ -62,32 +64,32 @@ bool World::init()
     this->createMenuItems();
     
     // Born Plant
-    for(int i=0; i<initNumP; i++)
-        P.push_back(new Plant);
+    for(int i=0; i<INIT_AMOUNT_P; i++)
+        G->L[lTypeP].push_back(new Plant);
 
     // Born Carnivore
-    for(int i=0; i<initNumC; i++)
-        C.push_back(new Carnivore);
+    for(int i=0; i<INIT_AMOUNT_C; i++)
+        G->L[lTypeC].push_back(new Carnivore);
     
     // Born Herbivore
-    for(int i=0; i<initNumH; i++)
-        H.push_back(new Herbivore);
+    for(int i=0; i<INIT_AMOUNT_H; i++)
+        G->L[lTypeH].push_back(new Herbivore);
     
     
-    std::list<LivingThings *>::iterator itP = P.begin();
-    while(itP != P.end()) {
+    std::list<LivingThings *>::iterator itP = G->L[lTypeP].begin();
+    while(itP != G->L[lTypeP].end()) {
         this->createNode((*itP));
         ++itP;
     }
 
-    std::list<LivingThings *>::iterator itC = C.begin();
-    while(itC != C.end()) {
+    std::list<LivingThings *>::iterator itC = G->L[lTypeC].begin();
+    while(itC != G->L[lTypeC].end()) {
         this->createNode((*itC));
         ++itC;
     }
 
-    std::list<LivingThings *>::iterator itH = H.begin();
-    while(itH != H.end()) {
+    std::list<LivingThings *>::iterator itH = G->L[lTypeH].begin();
+    while(itH != G->L[lTypeH].end()) {
         this->createNode((*itH));
         ++itH;
     }
@@ -101,30 +103,32 @@ bool World::init()
 // Game Loop
 void World::update(float delta)
 {
-    std::list<LivingThings *>::iterator itC = C.begin();
-    while(itC != C.end()) {
+    std::list<LivingThings *>::iterator itC = G->L[lTypeC].begin();
+    while(itC != G->L[lTypeC].end()) {
+        (*itC)->breeding();
         (*itC)->randomWalk();
-        (*itC)->eat(H);
+        (*itC)->eat();
         
-        if( (*itC)->hunger(itC, C) ) continue;
-        if( (*itC)->aging(itC, C) ) continue;
+        if( (*itC)->hunger(itC) ) continue;
+        if( (*itC)->aging(itC) ) continue;
         ++itC;
     }
     
-    std::list<LivingThings *>::iterator itH = H.begin();
-    while(itH != H.end()) {
+    std::list<LivingThings *>::iterator itH = G->L[lTypeH].begin();
+    while(itH != G->L[lTypeH].end()) {
+        (*itH)->breeding();
         (*itH)->randomWalk();
-        (*itH)->eat(P);
+        (*itH)->eat();
         
-        if( (*itH)->hunger(itH, H) ) continue;
-        if( (*itH)->aging(itH, H) ) continue;
+        if( (*itH)->hunger(itH) ) continue;
+        if( (*itH)->aging(itH) ) continue;
         ++itH;
     }
     
-    std::list<LivingThings *>::iterator itP = P.begin();
-    while(itP != P.end()) {
+    std::list<LivingThings *>::iterator itP = G->L[lTypeP].begin();
+    while(itP != G->L[lTypeP].end()) {
         
-        if( (*itP)->aging(itP, P) ) continue;
+        if( (*itP)->aging(itP) ) continue;
         ++itP;
     }
     
@@ -163,25 +167,24 @@ void World::createMenuItems(void)
 void World::createNode(LivingThings* L)
 {
 //    int i = L->index;
-
+//    L->drawNode->setTag(i);
     L->drawNode = DrawNode::create();
     L->drawNode->setPosition(Vec2(0, 0));
-//    L->drawNode->setTag(i);
     this->addChild(L->drawNode, L->zOrder);
         
     float radius = L->size / 2;
     L->cx = (rand() + (int)radius) % (int) (G->winSize.width - radius);
     L->cy = (rand() + (int)radius) % (int) (G->winSize.height - radius);
     L->drawNode->drawDot(Vec2(L->cx, L->cy), L->size, L->color);
-        
-    L->createDistination();
+    
+    L->createDistination(true);
 }
 
 void World::checkGameOver()
 {
-    unsigned long numP = P.size();
-    unsigned long numH = H.size();
-    unsigned long numC = C.size();
+    unsigned long numP = G->L[lTypeP].size();
+    unsigned long numH = G->L[lTypeH].size();
+    unsigned long numC = G->L[lTypeC].size();
     
     if( numP <= 0 || numH <= 0 || numC <= 0) {
         Label* gameOver = Label::createWithSystemFont("Game Over", GAME_FONT, 60);
