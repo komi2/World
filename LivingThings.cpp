@@ -8,6 +8,9 @@ void LivingThings::breeding()
     // Check condition
     bool isOK = false;
     if(eatingAmount >= GOAL_EATING_AMOUNT) {
+        
+        if(isHunting || color == cOld) return;
+        
         int season1 = endLife / 4;
         int season2 = season1 * 3;
         bool condition1 = (season1 < life && life < season1 + F_BREEDING);
@@ -79,7 +82,7 @@ void LivingThings::breeding()
 
 void LivingThings::crossbreeding(LivingThings* L, LivingThings* tL)
 {
-    float distance = pythagoras(L->cx, L->cy, tL->cx, tL->cy);
+    float distance = G->pythagoras(L->cx, L->cy, tL->cx, tL->cy);
     if(distance < size * 2) {
         // Reset male data
         L->eatingAmount = 0;
@@ -122,7 +125,7 @@ void LivingThings::eat()
         float dx = (*itTL)->cx - cx;
         float dy = (*itTL)->cy - cy;
         float distance = sqrt(dx*dx + dy*dy);
-        
+
         // Eat target prey
         if(distance < size * 2) {
             
@@ -148,8 +151,10 @@ bool LivingThings::hunger(std::list<LivingThings *>::iterator &itL)
         ++itL;
         CCLOG("Starvation");
         return true;
+    } else if( nutrition == HUNTING_POINT ) {
+        isHunting = true;
     }
-    
+ 
     --nutrition;
     return false;
 }
@@ -176,22 +181,76 @@ bool LivingThings::aging(std::list<LivingThings *>::iterator &itL)
     return false;
 }
 
-void LivingThings::randomWalk()
+void LivingThings::hunting()
 {
-    if( ! activity) return;
-    
-    if(moves > 0) {
-        moves--;
-        cx += ux;
-        cy += uy;
-    } else {
-        this->createDistination(true);
+    if( ! isHunting) {
+        vh = vhNormal;
+        vw = vwNormal;
+        speed = normalSpeed;
+        return;
     }
     
+    // statisfied stomach
+    if( nutrition > HUNTING_POINT ) {
+        isHunting = false;
+        return;
+    }
+    
+    // long range
+    vh = vhHunting;
+    vw = vwHunting;
+    speed = runningSpeed;
+    drawNode->drawDot(Vec2(cx, cy), size + 1, Color4F::WHITE);
+    
+    if(huntingTarget == NULL) {
+        huntingTarget = this->searchOperation();
+    }
+    
+    // Not found target
+    if(huntingTarget == NULL) return;
+    
+    if( ! G->checkAlive(huntingTarget, G->L[targetType]) ) {
+        this->createDistination(true);
+        huntingTarget = NULL;
+        return;
+    }
+    
+    // Lock on
+    sx = huntingTarget->cx;
+    sy = huntingTarget->cy;
+    this->createDistination(false);
+}
+
+LivingThings* LivingThings::searchOperation()
+{
+    std::list<LivingThings *>::iterator itTL = G->L[targetType].begin();
+    while(itTL != G->L[targetType].end()) {
+        if( G->hitCheckPointPolygon2d(Vec2(cx, cy), VR, VL, Vec2((*itTL)->cx, (*itTL)->cy)) ) {
+            return (*itTL);
+        }
+        ++itTL;
+    }
+    
+    return NULL;
+}
+
+void LivingThings::randomWalk()
+{
+    if(activity) {
+        if(moves > 0) {
+            moves--;
+            cx += ux;
+            cy += uy;
+        } else {
+            this->createDistination(true);
+        }
+    }
+
     drawNode->clear();
     
     // Hunting mode
-    if(hunting) drawNode->drawDot(Vec2(cx, cy), size + 1, Color4F::WHITE);
+    this->hunting();
+    
     drawNode->drawDot(Vec2(cx, cy), size, color);
 
     if( G->isVisualList[type] ) {
@@ -230,8 +289,10 @@ void LivingThings::createSight()
     rad = rad1 - rad2;
     double RX = (cos(rad) * h) + cx;
     double RY = (sin(rad) * h) + cy;
-
-    drawNode->drawTriangle(Vec2(cx, cy), Vec2(LX, LY), Vec2(RX, RY), Color4F(1,1,1,0.2));
+    
+    VR = Vec2(RX, RY);
+    VL = Vec2(LX, LY);
+    drawNode->drawTriangle(Vec2(cx, cy), VL, VR, Color4F(1,1,1,0.2));
 }
 
 void LivingThings::decomposition(LivingThings* L)

@@ -19,8 +19,12 @@ public:
         cOld = CL_OLD_H;
         cBreeding = CL_BREEDING_H;
         zOrder = zHerbivore;
-        vh = 70;
-        vw = 50;
+        vh = VISUAL_DISTANCE_H;
+        vw = VISUAL_WIDTH_H;
+        vhNormal =VISUAL_DISTANCE_H;
+        vwNormal =VISUAL_WIDTH_H;
+        vhHunting = VISUAL_DISTANCE_HUNTING_H;
+        vwHunting = VISUAL_WIDTH_HUNTING_H;
         endLife = arc4random() % (MAX_LIFE_H-MIN_LIFE_H) + MIN_LIFE_H;
         breedableAmount = arc4random() % (BREEDING_MAX_AMOUNT_H-BREEDING_MIN_AMOUNT_H) + BREEDING_MIN_AMOUNT_H;
         type = lTypeH;

@@ -32,22 +32,26 @@ public:
     cocos2d::Color4F cOld;
     cocos2d::Color4F cBreeding;
     
+    // Vector of sight
+    cocos2d::Vec2 VL, VR;
+    
     sexType sex;
     livingThingsType type, targetType;
     
     LivingThings* breedingTarget;
+    LivingThings* huntingTarget;
     
     // Point
     double moves, cx, cy, ux, uy, sx, sy;
     
     // Viewing angle
-    double vh, vw;
+    double vh, vw, vhNormal, vwNormal, vhHunting, vwHunting;
     
     float speed, normalSpeed, runningSpeed;
     
     int size, zOrder, life, endLife, nutrition, eatingAmount, breededAmount, breedableAmount;
     
-    bool hunting = false,
+    bool isHunting = false,
          activity = true;
     
     cocos2d::Color4F color;
@@ -75,6 +79,10 @@ public:
     void decomposition(LivingThings* L);
     
     void eat();
+    
+    void hunting();
+    
+    LivingThings* searchOperation();
     
     void createDistination(bool isRandom);
     

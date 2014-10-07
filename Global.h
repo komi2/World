@@ -41,13 +41,14 @@ public:
     bool checkAlive(LivingThings* L, std::list<LivingThings*> tL);
     
     void eraseTarget(LivingThings* L, std::list<LivingThings *> &tL);
+    
+    double pythagoras(double mx, double my, double sx, double sy);
+    
+    cocos2d::Vec2 sub_vector(cocos2d::Vec2 a, cocos2d::Vec2 b);
+    
+    bool hitCheckPointPolygon2d(cocos2d::Vec2 A, cocos2d::Vec2 B, cocos2d::Vec2 C, cocos2d::Vec2 P);
 };
 
-inline double pythagoras(double mx, double my, double sx, double sy) {
-    int dx = mx - sx;
-    int dy = my - sy;
-    return sqrt(dx*dx + dy*dy);
-}
 
 extern Global* G;
 
