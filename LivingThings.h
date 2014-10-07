@@ -71,6 +71,9 @@ public:
     
     void crossbreeding(LivingThings* L, LivingThings* tL);
     
+    // Born plants
+    void decomposition(LivingThings* L);
+    
     void eat();
     
     void createDistination(bool isRandom);

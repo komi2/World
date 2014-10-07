@@ -158,11 +158,15 @@ bool LivingThings::aging(std::list<LivingThings *>::iterator &itL)
 {
     // Die a Natural death
     if(life > endLife) {
+        // Carcass become a plant
+        this->decomposition( (*itL) );
+
         delete *itL;
         itL = G->L[type].erase(itL);
         ++itL;
         CCLOG("Natural death");
         return true;
+        
     } else if ( life == endLife - OLD_POINT ) {
         color = cOld;
         speed = speed - speed / 3;
@@ -228,6 +232,50 @@ void LivingThings::createSight()
     double RY = (sin(rad) * h) + cy;
 
     drawNode->drawTriangle(Vec2(cx, cy), Vec2(LX, LY), Vec2(RX, RY), Color4F(1,1,1,0.2));
+}
+
+void LivingThings::decomposition(LivingThings* L)
+{
+    // Plant is an exception
+    if(L->type == lTypeP) return;
+    
+    double distance = 25.;
+    double bornX, bornY;
+    for(int i=0; i < 4; ++i) {
+        switch (i) {
+            case 0:
+                bornX = L->cx;
+                bornY = L->cy + distance;
+                break;
+            case 1:
+                bornX = L->cx + distance;
+                bornY = L->cy;
+                break;
+            case 2:
+                bornX = L->cx;
+                bornY = L->cy - distance;
+                break;
+            case 3:
+                bornX = L->cx - distance;
+                bornY = L->cy;
+                break;
+        }
+        
+        // Check over window
+        if(bornX <= 0 || G->winSize.width <= bornX) continue;
+        if(bornY <= 0 || G->winSize.height <= bornY) continue;
+        
+        LivingThings* plant = new Plant;
+        plant->drawNode = DrawNode::create();
+        plant->drawNode->setPosition(Vec2(0, 0));
+        G->world->addChild(plant->drawNode, plant->zOrder);
+    
+
+        plant->cx = bornX;
+        plant->cy = bornY;
+        plant->drawNode->drawDot(Vec2(plant->cx, plant->cy), plant->size, plant->color);
+        G->L[lTypeP].push_back(plant);
+    }
 }
 
 LivingThings* LivingThings::getInstance()
