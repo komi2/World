@@ -7,6 +7,7 @@
 //
 
 #include "Global.h"
+#include "LivingThings.h"
 
 Global* G = new Global;
 

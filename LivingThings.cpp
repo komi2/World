@@ -3,6 +3,17 @@
 
 USING_NS_CC;
 
+LivingThings::LivingThings() {
+    color = cocos2d::Color4F::WHITE;
+    
+    size = 6;
+    speed = 1.0f;
+    sex = (arc4random() % 2) ? male : female ;
+    nutrition = 4000;
+}
+
+LivingThings::~LivingThings() {}
+
 void LivingThings::breeding()
 {
     // Check condition

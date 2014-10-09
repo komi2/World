@@ -12,15 +12,15 @@
 #include <stdio.h>
 #include "cocos2d.h"
 #include "Config.h"
+
 class LivingThings;
-#include "LivingThings.h"
 
 class Global
 {
 public:
     // World scene
     cocos2d::Scene* world;
-    
+
     // Living Things
     std::map<livingThingsType, std::list<LivingThings*>> L;
     
