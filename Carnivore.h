@@ -9,9 +9,9 @@
 #ifndef __CARNIVORE_H__
 #define __CARNIVORE_H__
 
-#include "LivingThings.h"
+#include "Animal.h"
 
-class Carnivore : public LivingThings
+class Carnivore : public Animal
 {
 public:
     Carnivore() {
