@@ -234,9 +234,7 @@ void Animal::randomWalk()
     
     drawNode->drawDot(Vec2(cx, cy), size, color);
     
-    if( G->isVisualList[type] ) {
-        this->createSight();
-    }
+    this->createSight();
 }
 
 void Animal::createSight()
@@ -256,7 +254,10 @@ void Animal::createSight()
     
     VR = Vec2(RX, RY);
     VL = Vec2(LX, LY);
-    drawNode->drawTriangle(Vec2(cx, cy), VL, VR, Color4F(1,1,1,0.2));
+    
+    Color4F sightColor = (G->isVisualList[type]) ? Color4F(1,1,1,0.2) : Color4F(0,0,0,0) ;
+    
+    drawNode->drawTriangle(Vec2(cx, cy), VL, VR, sightColor);
 }
 
 LivingThings* Animal::searchOperation()
