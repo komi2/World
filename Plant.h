@@ -17,6 +17,7 @@ public:
     Plant();
     ~Plant();
     
+    bool aging(std::list<LivingThings *>::iterator &itL);
     void createSight();
     
     // Get instance

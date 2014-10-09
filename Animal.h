@@ -14,10 +14,30 @@
 class Animal : public LivingThings
 {
 public:
-    Animal() {
-    }
-    ~Animal() {
-    }
+    Animal();
+    ~Animal();
+    
+    // Status color
+    cocos2d::Color4F cBreeding;
+    
+    // Vector of sight
+    cocos2d::Vec2 VL, VR;
+    
+    LivingThings* breedingTarget;
+    LivingThings* huntingTarget;
+    
+    // Viewing angle
+    double vh, vw, vhNormal, vwNormal, vhHunting, vwHunting;
+    
+    bool aging(std::list<LivingThings *>::iterator &itL);
+    void breeding();
+    void crossbreeding(LivingThings* L, LivingThings* tL);
+    void eat();
+    bool hunger(std::list<LivingThings *>::iterator &itL);
+    void hunting();
+    void randomWalk();
+    void createSight();
+    LivingThings* searchOperation();
 };
 
 #endif

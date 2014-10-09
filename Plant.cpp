@@ -24,6 +24,24 @@ Plant::~Plant() {
     CCLOG("Plant is dead.");
 }
 
+bool Plant::aging(std::list<LivingThings *>::iterator &itL)
+{
+    // Die a Natural death
+    if(life > endLife) {
+        delete *itL;
+        itL = G->L[type].erase(itL);
+        ++itL;
+        CCLOG("Natural death");
+        return true;
+        
+    } else if ( life == endLife - OLD_POINT ) {
+        color = cOld;
+    }
+    
+    ++life;
+    return false;
+}
+
 void Plant::createSight() {}
 
 LivingThings* Plant::getInstance()

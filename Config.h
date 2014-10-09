@@ -18,7 +18,7 @@
 #define GAME_FONT "HiraKakuProN-W6"
 
 // Initial amount of Living Things
-#define INIT_AMOUNT_C 5
+#define INIT_AMOUNT_C 10
 #define INIT_AMOUNT_H 30
 #define INIT_AMOUNT_P 60
 
@@ -64,7 +64,7 @@
 #define CL_BREEDING_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(255, 0, 195))
 
 #define BREEDING_MIN_AMOUNT_H 2
-#define BREEDING_MAX_AMOUNT_H 4
+#define BREEDING_MAX_AMOUNT_H 3
 #define BREEDING_MIN_AMOUNT_C 1
 #define BREEDING_MAX_AMOUNT_C 2
 

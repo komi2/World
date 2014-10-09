@@ -22,22 +22,12 @@ public:
     // Status color
     cocos2d::Color4F cNormal;
     cocos2d::Color4F cOld;
-    cocos2d::Color4F cBreeding;
-    
-    // Vector of sight
-    cocos2d::Vec2 VL, VR;
     
     sexType sex;
     livingThingsType type, targetType;
     
-    LivingThings* breedingTarget;
-    LivingThings* huntingTarget;
-    
     // Point
     double moves, cx, cy, ux, uy, sx, sy;
-    
-    // Viewing angle
-    double vh, vw, vhNormal, vwNormal, vhHunting, vwHunting;
     
     float speed, normalSpeed, runningSpeed;
     
@@ -58,31 +48,31 @@ public:
     void born();
     
     // Aging
-    bool aging(std::list<LivingThings *>::iterator &itL);
+    virtual bool aging(std::list<LivingThings *>::iterator &itL);
     
     // Check nutrition
-    bool hunger(std::list<LivingThings *>::iterator &itL);
+    virtual bool hunger(std::list<LivingThings *>::iterator &itL);
     
-    void breeding();
+    virtual void breeding();
     
-    void crossbreeding(LivingThings* L, LivingThings* tL);
+    virtual void crossbreeding(LivingThings* L, LivingThings* tL);
     
     // Born plants
     void decomposition(LivingThings* L);
     
-    void eat();
+    virtual void eat();
     
-    void hunting();
+    virtual void hunting();
     
-    LivingThings* searchOperation();
+    virtual LivingThings* searchOperation();
     
     void createDistination(bool isRandom);
     
     // Moves
-    void randomWalk();
+    virtual void randomWalk();
     
     // Create sight
-    void createSight();
+    virtual void createSight();
 };
 
 
