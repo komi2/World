@@ -17,6 +17,8 @@ public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
     
+    static void theCreation();
+    
     // Menu layer
     cocos2d::LayerColor* _layerMenu;
     
@@ -30,8 +32,6 @@ public:
     void createMenuItems(void);
     
     void checkGameOver(void);
-
-    void createNode(LivingThings* L);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);

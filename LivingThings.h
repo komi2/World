@@ -31,7 +31,7 @@ public:
     
     float speed, normalSpeed, runningSpeed;
     
-    int size, zOrder, life, endLife, nutrition, eatingAmount, breededAmount, breedableAmount;
+    int size, zOrder, life = 0, endLife, nutrition, eatingAmount, breededAmount, breedableAmount;
     
     bool isHunting = false,
          activity = true;
@@ -45,7 +45,7 @@ public:
     virtual LivingThings* getInstance();
     
     // Draw
-    void born();
+    void born(bool isBeginning);
     
     // Aging
     virtual bool aging(std::list<LivingThings *>::iterator &itL);

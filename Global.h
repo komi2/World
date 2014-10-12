@@ -18,11 +18,17 @@ class LivingThings;
 class Global
 {
 public:
+    Global();
+    
     // World scene
     cocos2d::Scene* world;
 
     // Living Things
     std::map<livingThingsType, std::list<LivingThings*>> L;
+    
+    std::map<livingThingsType, cocos2d::DrawNode*> mainDrawNode;
+    
+    std::map<livingThingsType, cocos2d::DrawNode*> visionDrawNode;
     
     // Living Things visual flag
     bool isVisualList[2];

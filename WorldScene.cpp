@@ -19,6 +19,8 @@ Scene* World::createScene()
     scene->addChild(layer);
     
     G->world = scene;
+    
+    World::theCreation();
 
     // return the scene
     return scene;
@@ -35,6 +37,15 @@ bool World::init()
     
     // Get window size
     G->winSize = Director::getInstance()->getWinSize();
+    
+    // Create main draw node
+    G->mainDrawNode[lTypeC] = DrawNode::create();
+    G->mainDrawNode[lTypeH] = DrawNode::create();
+    G->mainDrawNode[lTypeP] = DrawNode::create();
+    
+    // Create vision draw node
+    G->visionDrawNode[lTypeC] = DrawNode::create();
+    G->visionDrawNode[lTypeH] = DrawNode::create();
     
     // Create Background
     LayerColor* layer = LayerColor::create(WORLD_COLOR, G->winSize.width, G->winSize.height);
@@ -63,46 +74,51 @@ bool World::init()
     // Create menu items
     this->createMenuItems();
     
-    // Born Plant
-    for(int i=0; i<INIT_AMOUNT_P; i++)
-        G->L[lTypeP].push_back(new Plant);
-
-    // Born Carnivore
-    for(int i=0; i<INIT_AMOUNT_C; i++)
-        G->L[lTypeC].push_back(new Carnivore);
-    
-    // Born Herbivore
-    for(int i=0; i<INIT_AMOUNT_H; i++)
-        G->L[lTypeH].push_back(new Herbivore);
-    
-    
-    std::list<LivingThings *>::iterator itP = G->L[lTypeP].begin();
-    while(itP != G->L[lTypeP].end()) {
-        this->createNode((*itP));
-        ++itP;
-    }
-
-    std::list<LivingThings *>::iterator itC = G->L[lTypeC].begin();
-    while(itC != G->L[lTypeC].end()) {
-        this->createNode((*itC));
-        ++itC;
-    }
-
-    std::list<LivingThings *>::iterator itH = G->L[lTypeH].begin();
-    while(itH != G->L[lTypeH].end()) {
-        this->createNode((*itH));
-        ++itH;
-    }
-    
     // update
     this->scheduleUpdate();
     
     return true;
 }
 
+
+void World::theCreation()
+{
+    // Born Plant
+    LivingThings* originP = new Plant;
+    for(int i=0; i<INIT_AMOUNT_P; i++)
+        originP->born(true);
+    
+    // Born Carnivore
+    LivingThings* originC = new Carnivore;
+    for(int i=0; i<INIT_AMOUNT_C; i++)
+        originC->born(true);
+    
+    // Born Herbivore
+    LivingThings* originH = new Herbivore;
+    for(int i=0; i<INIT_AMOUNT_H; i++)
+        originH->born(true);
+    
+    G->world->addChild(G->mainDrawNode[lTypeP], zPlant);
+    G->world->addChild(G->mainDrawNode[lTypeC], zCarnivore);
+    G->world->addChild(G->mainDrawNode[lTypeH], zHerbivore);
+    
+    G->world->addChild(G->visionDrawNode[lTypeC], zPlant);
+    G->world->addChild(G->visionDrawNode[lTypeH], zPlant);
+    
+    delete originP;
+    delete originC;
+    delete originH;
+}
+
 // Game Loop
 void World::update(float delta)
 {
+    G->mainDrawNode[lTypeC]->clear();
+    G->mainDrawNode[lTypeH]->clear();
+    G->mainDrawNode[lTypeP]->clear();
+    G->visionDrawNode[lTypeC]->clear();
+    G->visionDrawNode[lTypeH]->clear();
+    
     std::list<LivingThings *>::iterator itC = G->L[lTypeC].begin();
     while(itC != G->L[lTypeC].end()) {
         (*itC)->breeding();
@@ -162,22 +178,6 @@ void World::createMenuItems(void)
     menuItems->setPosition(Vec2(_layerMenu->getContentSize().width/2, G->winSize.height - 230));
     _layerMenu->addChild(menuItems, zMenuItems);
     
-}
-
-void World::createNode(LivingThings* L)
-{
-//    int i = L->index;
-//    L->drawNode->setTag(i);
-    L->drawNode = DrawNode::create();
-    L->drawNode->setPosition(Vec2(0, 0));
-    this->addChild(L->drawNode, L->zOrder);
-        
-    float radius = L->size / 2;
-    L->cx = (rand() + (int)radius) % (int) (G->winSize.width - radius);
-    L->cy = (rand() + (int)radius) % (int) (G->winSize.height - radius);
-    L->drawNode->drawDot(Vec2(L->cx, L->cy), L->size, L->color);
-    
-    L->createDistination(true);
 }
 
 void World::checkGameOver()

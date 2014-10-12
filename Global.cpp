@@ -13,6 +13,13 @@ Global* G = new Global;
 
 USING_NS_CC;
 
+Global::Global()
+{
+    // Initialize
+    isVisualList[lTypeC] = false;
+    isVisualList[lTypeH] = false;
+}
+
 double Global::pythagoras(double mx, double my, double sx, double sy)
 {
     int dx = mx - sx;

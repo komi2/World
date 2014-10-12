@@ -111,8 +111,8 @@ void Animal::breeding()
         activity = false;
         G->breedingFemaleMap[type].push_back(this);
         
-        drawNode->clear();
-        drawNode->drawDot(Vec2(cx, cy), size, color);
+        //drawNode->clear();
+        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
     }
 }
 
@@ -126,7 +126,7 @@ void Animal::crossbreeding(LivingThings* L, LivingThings* tL)
         L->createDistination(true);
         
         for(int i = 0; i < tL->breedableAmount; ++i) {
-            tL->born();
+            tL->born(false);
         }
         
         ++tL->breededAmount;
@@ -194,7 +194,7 @@ void Animal::hunting()
     vh = vhHunting;
     vw = vwHunting;
     speed = runningSpeed;
-    drawNode->drawDot(Vec2(cx, cy), size + 1, Color4F::WHITE);
+    G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size + 1, Color4F::WHITE);
     
     if(huntingTarget == NULL) {
         huntingTarget = this->searchOperation();
@@ -227,12 +227,12 @@ void Animal::randomWalk()
         }
     }
     
-    drawNode->clear();
+    //drawNode->clear();
     
     // Hunting mode
     this->hunting();
     
-    drawNode->drawDot(Vec2(cx, cy), size, color);
+    G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
     
     this->createSight();
 }
@@ -257,7 +257,7 @@ void Animal::createSight()
     
     Color4F sightColor = (G->isVisualList[type]) ? Color4F(1,1,1,0.2) : Color4F(0,0,0,0) ;
     
-    drawNode->drawTriangle(Vec2(cx, cy), VL, VR, sightColor);
+    G->visionDrawNode[type]->drawTriangle(Vec2(cx, cy), VL, VR, sightColor);
 }
 
 LivingThings* Animal::searchOperation()

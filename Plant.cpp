@@ -8,6 +8,8 @@
 
 #include "Plant.h"
 
+USING_NS_CC;
+
 Plant::Plant() {
     cNormal = CL_NORAML_P;
     cOld = CL_OLD_P;
@@ -19,13 +21,13 @@ Plant::Plant() {
 }
 
 Plant::~Plant() {
-    drawNode->clear();
-    G->eraseTarget(this, G->breedingFemaleMap[type]);
     CCLOG("Plant is dead.");
 }
 
 bool Plant::aging(std::list<LivingThings *>::iterator &itL)
 {
+    G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
+    
     // Die a Natural death
     if(life > endLife) {
         delete *itL;
@@ -46,5 +48,5 @@ void Plant::createSight() {}
 
 LivingThings* Plant::getInstance()
 {
-    return new LivingThings;
+    return new Plant;
 }

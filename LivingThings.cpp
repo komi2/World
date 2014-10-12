@@ -17,19 +17,22 @@ void LivingThings::crossbreeding(LivingThings* L, LivingThings* tL) {}
 
 void LivingThings::breeding() {}
 
-void LivingThings::born()
+void LivingThings::born(bool isBeginning)
 {
     // New object
     LivingThings* newL = this->getInstance();
     
-    newL->drawNode = DrawNode::create();
-    newL->drawNode->setPosition(Vec2(0, 0));
-    G->world->addChild(newL->drawNode, newL->zOrder);
-    
-    // Point of my parent
-    newL->cx = cx;
-    newL->cy = cy;
-    newL->drawNode->drawDot(Vec2(newL->cx, newL->cy), newL->size, newL->color);
+    if(isBeginning) {
+        float radius = newL->size / 2;
+        newL->cx = (rand() + (int)radius) % (int) (G->winSize.width - radius);
+        newL->cy = (rand() + (int)radius) % (int) (G->winSize.height - radius);
+    } else {
+        // Point of my parent
+        newL->cx = cx;
+        newL->cy = cy;
+    }
+
+    G->mainDrawNode[newL->type]->drawDot(Vec2(newL->cx, newL->cy), newL->size, newL->color);
     
     newL->createDistination(true);
     
@@ -100,14 +103,10 @@ void LivingThings::decomposition(LivingThings* L)
         if(bornY <= 0 || G->winSize.height <= bornY) continue;
         
         LivingThings* plant = new Plant;
-        plant->drawNode = DrawNode::create();
-        plant->drawNode->setPosition(Vec2(0, 0));
-        G->world->addChild(plant->drawNode, plant->zOrder);
-    
 
         plant->cx = bornX;
         plant->cy = bornY;
-        plant->drawNode->drawDot(Vec2(plant->cx, plant->cy), plant->size, plant->color);
+        G->mainDrawNode[lTypeP]->drawDot(Vec2(plant->cx, plant->cy), plant->size, plant->color);
         G->L[lTypeP].push_back(plant);
     }
 }
