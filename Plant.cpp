@@ -16,6 +16,7 @@ Plant::Plant() {
     zOrder = zPlant;
     size = 4;
     endLife = arc4random() % (MAX_LIFE_P-MIN_LIFE_P) + MIN_LIFE_P;
+    nutrition = arc4random() % (MAX_NUTRITION_P-MIN_NUTRITION_P) + MIN_NUTRITION_P;
     type = lTypeP;
     color = cNormal;
 }

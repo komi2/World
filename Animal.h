@@ -34,7 +34,6 @@ public:
     void crossbreeding(LivingThings* L, LivingThings* tL);
     void eat();
     bool hunger(std::list<LivingThings *>::iterator &itL);
-    void hunting();
     void randomWalk();
     void createSight();
     LivingThings* searchOperation();

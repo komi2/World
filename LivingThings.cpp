@@ -5,10 +5,8 @@ USING_NS_CC;
 
 LivingThings::LivingThings() {
     color = cocos2d::Color4F::WHITE;
-    
     size = 6;
     sex = (arc4random() % 2) ? male : female ;
-    nutrition = 7000;
 }
 
 LivingThings::~LivingThings() {}

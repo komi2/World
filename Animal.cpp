@@ -175,46 +175,6 @@ bool Animal::hunger(std::list<LivingThings *>::iterator &itL)
     return false;
 }
 
-void Animal::hunting()
-{
-    if( ! isHunting) {
-        vh = vhNormal;
-        vw = vwNormal;
-        speed = normalSpeed;
-        return;
-    }
-    
-    // statisfied stomach
-    if( nutrition > HUNTING_POINT ) {
-        isHunting = false;
-        return;
-    }
-    
-    // long range
-    vh = vhHunting;
-    vw = vwHunting;
-    speed = runningSpeed;
-    G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size + 1, Color4F::WHITE);
-    
-    if(huntingTarget == NULL) {
-        huntingTarget = this->searchOperation();
-    }
-    
-    // Not found target
-    if(huntingTarget == NULL) return;
-    
-    if( ! G->checkAlive(huntingTarget, G->L[targetType]) ) {
-        this->createDistination(true);
-        huntingTarget = NULL;
-        return;
-    }
-    
-    // Lock on
-    sx = huntingTarget->cx;
-    sy = huntingTarget->cy;
-    this->createDistination(false);
-}
-
 void Animal::randomWalk()
 {
     if(activity) {

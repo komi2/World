@@ -42,6 +42,14 @@
 #define MIN_LIFE_C 5000
 #define MAX_LIFE_C 7000
 
+// Living Things max~min nutrition
+#define MIN_NUTRITION_P 5000
+#define MAX_NUTRITION_P 7000
+#define MIN_NUTRITION_H 3000
+#define MAX_NUTRITION_H 6000
+#define MIN_NUTRITION_C 2500
+#define MAX_NUTRITION_C 5000
+
 // Living Things speed
 #define NORMAL_SPPED_H 1.0
 #define RUNNING_SPEED_H 1.3
@@ -75,7 +83,7 @@
 #define OLD_POINT 500
 
 // Hunting point
-#define HUNTING_POINT 1000
+#define HUNTING_POINT 2000
 
 // Nutrition division point
 #define NUTRITION_DIV_POINT 3
