@@ -257,7 +257,7 @@ void Animal::createSight()
     
     Color4F sightColor = (G->isVisualList[type]) ? Color4F(1,1,1,0.2) : Color4F(0,0,0,0) ;
     
-    G->visionDrawNode[type]->drawTriangle(Vec2(cx, cy), VL, VR, sightColor);
+    G->visionDrawNode->drawTriangle(Vec2(cx, cy), VL, VR, sightColor);
 }
 
 LivingThings* Animal::searchOperation()

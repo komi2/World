@@ -93,6 +93,7 @@ enum zOrder
     zPlant,
     zHerbivore,
     zCarnivore,
+    zVision,
     zButton,
     zMenuLayer,
     zMenuItems

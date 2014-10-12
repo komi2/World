@@ -28,7 +28,8 @@ public:
     
     std::map<livingThingsType, cocos2d::DrawNode*> mainDrawNode;
     
-    std::map<livingThingsType, cocos2d::DrawNode*> visionDrawNode;
+//    std::map<livingThingsType, cocos2d::DrawNode*> visionDrawNode;
+    cocos2d::DrawNode* visionDrawNode;
     
     // Living Things visual flag
     bool isVisualList[2];

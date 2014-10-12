@@ -44,8 +44,7 @@ bool World::init()
     G->mainDrawNode[lTypeP] = DrawNode::create();
     
     // Create vision draw node
-    G->visionDrawNode[lTypeC] = DrawNode::create();
-    G->visionDrawNode[lTypeH] = DrawNode::create();
+    G->visionDrawNode = DrawNode::create();
     
     // Create Background
     LayerColor* layer = LayerColor::create(WORLD_COLOR, G->winSize.width, G->winSize.height);
@@ -102,8 +101,7 @@ void World::theCreation()
     G->world->addChild(G->mainDrawNode[lTypeC], zCarnivore);
     G->world->addChild(G->mainDrawNode[lTypeH], zHerbivore);
     
-    G->world->addChild(G->visionDrawNode[lTypeC], zPlant);
-    G->world->addChild(G->visionDrawNode[lTypeH], zPlant);
+    G->world->addChild(G->visionDrawNode, zVision);
     
     delete originP;
     delete originC;
@@ -116,8 +114,9 @@ void World::update(float delta)
     G->mainDrawNode[lTypeC]->clear();
     G->mainDrawNode[lTypeH]->clear();
     G->mainDrawNode[lTypeP]->clear();
-    G->visionDrawNode[lTypeC]->clear();
-    G->visionDrawNode[lTypeH]->clear();
+    G->visionDrawNode->clear();
+    
+    this->checkGameOver();
     
     std::list<LivingThings *>::iterator itC = G->L[lTypeC].begin();
     while(itC != G->L[lTypeC].end()) {
@@ -147,8 +146,6 @@ void World::update(float delta)
         if( (*itP)->aging(itP) ) continue;
         ++itP;
     }
-    
-    this->checkGameOver();
 }
 
 void World::createMenuItems(void)
