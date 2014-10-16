@@ -35,6 +35,7 @@ bool Plant::aging(std::list<LivingThings *>::iterator &itL)
         itL = G->L[type].erase(itL);
         ++itL;
         CCLOG("Natural death");
+        G->deathCounter[type][naturalDeath]++;
         return true;
         
     } else if ( life == endLife - OLD_POINT ) {

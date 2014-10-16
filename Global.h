@@ -28,6 +28,8 @@ public:
     
     std::map<livingThingsType, cocos2d::DrawNode*> mainDrawNode;
     
+    std::map<livingThingsType, std::map<causeOfDeath, int>> deathCounter;
+    
 //    std::map<livingThingsType, cocos2d::DrawNode*> visionDrawNode;
     cocos2d::DrawNode* visionDrawNode;
     

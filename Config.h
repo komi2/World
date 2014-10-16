@@ -38,17 +38,17 @@
 #define MIN_LIFE_P 7000
 #define MAX_LIFE_P 9000
 #define MIN_LIFE_H 4000
-#define MAX_LIFE_H 6000
+#define MAX_LIFE_H 8000
 #define MIN_LIFE_C 5000
-#define MAX_LIFE_C 7000
+#define MAX_LIFE_C 8000
 
 // Living Things max~min nutrition
 #define MIN_NUTRITION_P 5000
 #define MAX_NUTRITION_P 7000
-#define MIN_NUTRITION_H 3000
-#define MAX_NUTRITION_H 6000
-#define MIN_NUTRITION_C 2500
-#define MAX_NUTRITION_C 5000
+#define MIN_NUTRITION_H 4500
+#define MAX_NUTRITION_H 7000
+#define MIN_NUTRITION_C 3000
+#define MAX_NUTRITION_C 6000
 
 // Living Things speed
 #define NORMAL_SPPED_H 1.0
@@ -89,7 +89,7 @@
 #define NUTRITION_DIV_POINT 3
 
 // Span of breeding
-#define F_BREEDING 1000
+#define F_BREEDING 1500
 
 // Eating amount of necessity breeding
 #define GOAL_EATING_AMOUNT 1
@@ -119,6 +119,13 @@ enum sexType
 {
     male,
     female,
+};
+
+enum causeOfDeath
+{
+    naturalDeath,
+    prey,
+    starvation,
 };
 
 #endif

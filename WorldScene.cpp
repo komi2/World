@@ -194,6 +194,34 @@ void World::checkGameOver()
         menu->setPosition(Vec2(G->winSize.width/2, G->winSize.height/2 - (gameOver->getContentSize().height+50)));
         this->addChild(menu, zButton);
         
+        
+        // Cause of death
+        if(DEBUG_MODE) {
+            Label* deathP= Label::createWithSystemFont(
+                StringUtils::format("P: Rest[%lu], Nature Death[%d], Prey[%d], Startvation[%d]", numP,
+                G->deathCounter[lTypeP][naturalDeath],
+                G->deathCounter[lTypeP][prey],
+                G->deathCounter[lTypeP][starvation]),GAME_FONT, 30);
+            deathP->setPosition(Vec2(G->winSize.width/2, 40));
+            this->addChild(deathP, zButton);
+            
+            Label* deathH= Label::createWithSystemFont(
+                StringUtils::format("H: Rest[%lu], Nature Death[%d], Prey[%d], Startvation[%d]", numH,
+                G->deathCounter[lTypeH][naturalDeath],
+                G->deathCounter[lTypeH][prey],
+                G->deathCounter[lTypeH][starvation]),GAME_FONT, 30);
+            deathH->setPosition(Vec2(G->winSize.width/2, 80));
+            this->addChild(deathH, zButton);
+            
+            Label* deathC= Label::createWithSystemFont(
+                StringUtils::format("C: Rest[%lu], Nature Death[%d], Prey[%d], Startvation[%d]", numC,
+                G->deathCounter[lTypeC][naturalDeath],
+                G->deathCounter[lTypeC][prey],
+                G->deathCounter[lTypeC][starvation]),GAME_FONT, 30);
+            deathC->setPosition(Vec2(G->winSize.width/2, 120));
+            this->addChild(deathC, zButton);
+        }
+            
         this->pause();
     }
 }

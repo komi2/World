@@ -28,6 +28,7 @@ bool Animal::aging(std::list<LivingThings *>::iterator &itL)
         itL = G->L[type].erase(itL);
         ++itL;
         CCLOG("Natural death");
+        G->deathCounter[type][naturalDeath]++;
         return true;
         
     } else if ( life == endLife - OLD_POINT ) {
@@ -150,6 +151,7 @@ void Animal::eat()
             ++eatingAmount;
             
             // Die
+            G->deathCounter[(*itTL)->type][prey]++;
             delete *itTL;
             itTL = G->L[targetType].erase(itTL);
         }
@@ -166,6 +168,7 @@ bool Animal::hunger(std::list<LivingThings *>::iterator &itL)
         itL = G->L[type].erase(itL);
         ++itL;
         CCLOG("Starvation");
+        G->deathCounter[type][starvation]++;
         return true;
     } else if( nutrition == HUNTING_POINT ) {
         isHunting = true;
