@@ -7,6 +7,7 @@
 //
 
 #include "Animal.h"
+#include "Plant.h"
 
 USING_NS_CC;
 
@@ -150,6 +151,10 @@ void Animal::eat()
             nutrition += (*itTL)->nutrition / NUTRITION_DIV_POINT;
             ++eatingAmount;
             
+            // Defecate
+            if(eatingAmount % 2 == 0)
+                this->defecate();
+            
             // Die
             G->deathCounter[(*itTL)->type][prey]++;
             delete *itTL;
@@ -158,6 +163,16 @@ void Animal::eat()
         
         ++itTL;
     }
+}
+
+void Animal::defecate()
+{
+    LivingThings* plant = new Plant;
+
+    plant->cx = cx;
+    plant->cy = cy;
+    G->mainDrawNode[lTypeP]->drawDot(Vec2(plant->cx, plant->cy), plant->size, plant->color);
+    G->L[lTypeP].push_back(plant);
 }
 
 bool Animal::hunger(std::list<LivingThings *>::iterator &itL)

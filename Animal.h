@@ -33,6 +33,7 @@ public:
     void breeding();
     void crossbreeding(LivingThings* L, LivingThings* tL);
     void eat();
+    void defecate();
     bool hunger(std::list<LivingThings *>::iterator &itL);
     void randomWalk();
     void createSight();
