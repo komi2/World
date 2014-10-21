@@ -34,7 +34,8 @@ public:
     int size, zOrder, life = 0, endLife, nutrition, eatingAmount, breededAmount, breedableAmount;
     
     bool isHunting = false,
-         activity = true;
+         activity = true,
+         isBreakTime = false;
     
     cocos2d::Color4F color;
 
@@ -46,6 +47,8 @@ public:
     
     // Draw
     void born(bool isBeginning);
+    
+    virtual void fatigueManage();
     
     // Aging
     virtual bool aging(std::list<LivingThings *>::iterator &itL);

@@ -11,6 +11,8 @@ LivingThings::LivingThings() {
 
 LivingThings::~LivingThings() {}
 
+void LivingThings::fatigueManage() {}
+
 void LivingThings::crossbreeding(LivingThings* L, LivingThings* tL) {}
 
 void LivingThings::breeding() {}

@@ -123,6 +123,7 @@ void World::update(float delta)
         (*itC)->breeding();
         (*itC)->randomWalk();
         (*itC)->eat();
+        (*itC)->fatigueManage();
         
         if( (*itC)->hunger(itC) ) continue;
         if( (*itC)->aging(itC) ) continue;
@@ -134,6 +135,7 @@ void World::update(float delta)
         (*itH)->breeding();
         (*itH)->randomWalk();
         (*itH)->eat();
+        (*itH)->fatigueManage();
         
         if( (*itH)->hunger(itH) ) continue;
         if( (*itH)->aging(itH) ) continue;

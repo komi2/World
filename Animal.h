@@ -29,6 +29,10 @@ public:
     // Viewing angle
     double vh, vw, vhNormal, vwNormal, vhHunting, vwHunting;
     
+    int fatigue = 0;
+    int breakSpan = arc4random() % (3000) + 500;
+    
+    void fatigueManage();
     bool aging(std::list<LivingThings *>::iterator &itL);
     void breeding();
     void crossbreeding(LivingThings* L, LivingThings* tL);

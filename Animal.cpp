@@ -18,6 +18,24 @@ Animal::Animal()
 
 Animal::~Animal() {}
 
+void Animal::fatigueManage()
+{
+    // Exceptions
+    if(isHunting
+       || color == cBreeding) {
+        isBreakTime = false;
+        return;
+    }
+    
+    if(isBreakTime) {
+        fatigue -= 2;
+        isBreakTime = (fatigue > 0);
+    } else {
+        fatigue++;
+        isBreakTime = (fatigue > breakSpan);
+    }
+}
+
 bool Animal::aging(std::list<LivingThings *>::iterator &itL)
 {
     // Die a Natural death
@@ -195,7 +213,7 @@ bool Animal::hunger(std::list<LivingThings *>::iterator &itL)
 
 void Animal::randomWalk()
 {
-    if(activity) {
+    if(activity && ! isBreakTime) {
         if(moves > 0) {
             moves--;
             cx += ux;
