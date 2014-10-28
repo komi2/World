@@ -121,7 +121,7 @@ void World::update(float delta)
     std::list<LivingThings *>::iterator itC = G->L[lTypeC].begin();
     while(itC != G->L[lTypeC].end()) {
         (*itC)->breeding();
-        (*itC)->randomWalk();
+        (*itC)->behavior();
         (*itC)->eat();
         (*itC)->fatigueManage();
         
@@ -133,7 +133,7 @@ void World::update(float delta)
     std::list<LivingThings *>::iterator itH = G->L[lTypeH].begin();
     while(itH != G->L[lTypeH].end()) {
         (*itH)->breeding();
-        (*itH)->randomWalk();
+        (*itH)->behavior();
         (*itH)->eat();
         (*itH)->fatigueManage();
         

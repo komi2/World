@@ -30,8 +30,9 @@ public:
     double vh, vw, vhNormal, vwNormal, vhHunting, vwHunting;
     
     int fatigue = 0;
-    int breakSpan = arc4random() % (3000) + 500;
+    int breakSpan = arc4random() % (4000) + 1500;
     
+    void behavior();
     void fatigueManage();
     bool aging(std::list<LivingThings *>::iterator &itL);
     void breeding();
@@ -40,6 +41,8 @@ public:
     void defecate();
     bool hunger(std::list<LivingThings *>::iterator &itL);
     void randomWalk();
+    void groupMove();
+    void laze();
     void createSight();
     LivingThings* searchOperation();
 };

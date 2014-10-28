@@ -26,6 +26,8 @@ public:
     // Living Things
     std::map<livingThingsType, std::list<LivingThings*>> L;
     
+    std::map<livingThingsType, std::list<LivingThings*>> group;
+    
     std::map<livingThingsType, cocos2d::DrawNode*> mainDrawNode;
     
     std::map<livingThingsType, std::map<causeOfDeath, int>> deathCounter;

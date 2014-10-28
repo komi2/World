@@ -26,8 +26,11 @@ public:
     sexType sex;
     livingThingsType type, targetType;
     
+    std::map<DNAType, int> chromosome;
+    
     // Point
     double moves, cx, cy, ux, uy, sx, sy;
+    double groupX = 0, groupY = 0;
     
     float speed, normalSpeed, runningSpeed;
     
@@ -49,6 +52,8 @@ public:
     void born(bool isBeginning);
     
     virtual void fatigueManage();
+    
+    virtual void behavior();
     
     // Aging
     virtual bool aging(std::list<LivingThings *>::iterator &itL);
@@ -73,6 +78,8 @@ public:
     
     // Moves
     virtual void randomWalk();
+    virtual void groupMove();
+    virtual void laze();
     
     // Create sight
     virtual void createSight();

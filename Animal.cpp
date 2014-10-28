@@ -18,6 +18,29 @@ Animal::Animal()
 
 Animal::~Animal() {}
 
+void Animal::behavior()
+{
+    switch (chromosome[dBehavior]) {
+        case loneWolf:
+            this->randomWalk();
+            break;
+            
+        case collective:
+            // TODO
+            this->groupMove();
+            break;
+            
+        case laziness:
+            this->laze();
+            break;
+            
+        default:
+            CCLOG("ERROR");
+            exit(1);
+            break;
+    }
+}
+
 void Animal::fatigueManage()
 {
     // Exceptions
@@ -30,9 +53,17 @@ void Animal::fatigueManage()
     if(isBreakTime) {
         fatigue -= 2;
         isBreakTime = (fatigue > 0);
+        
+        // return original speed
+        if(speed != normalSpeed)
+            speed = normalSpeed;
     } else {
         fatigue++;
         isBreakTime = (fatigue > breakSpan);
+        
+        // Get tired
+//        float a = -1500/normalSpeed;
+//        speed = ((breakSpan-fatigue) - 1500) / a;
     }
 }
 
@@ -223,7 +254,25 @@ void Animal::randomWalk()
         }
     }
     
-    //drawNode->clear();
+    // Hunting mode
+    this->hunting();
+    
+    G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
+    
+    this->createSight();
+}
+
+void Animal::laze()
+{
+    if(activity && isHunting) {
+        if(moves > 0) {
+            moves--;
+            cx += ux;
+            cy += uy;
+        } else {
+            this->createDistination(true);
+        }
+    }
     
     // Hunting mode
     this->hunting();
@@ -231,6 +280,68 @@ void Animal::randomWalk()
     G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
     
     this->createSight();
+}
+
+void Animal::groupMove()
+{
+    std::list<LivingThings *>::iterator it = G->group[type].begin();
+    
+    // If pointer is group leader, random walk
+    if(this == (*it)) {
+        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size+4, Color4F::YELLOW);
+        if(activity){// && ! isBreakTime) {
+            if(moves > 0) {
+                moves--;
+                cx += ux;
+                cy += uy;
+            } else {
+                this->createDistination(true);
+                
+                // Initialize other animal
+                while(it != G->group[type].end()) {
+                    if(this != (*it)) {
+                        (*it)->groupX = 0;
+                        (*it)->groupY = 0;
+                    }
+                    ++it;
+                }
+            }
+        }
+        
+        // Hunting mode
+        this->hunting();
+        
+        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
+        
+        this->createSight();
+    } else {
+        if(groupX == 0 && groupY == 0) {
+            groupX = arc4random() % 200 + ((*it)->cx-100);
+            groupY = arc4random() % 200 + ((*it)->cy-100);
+            sx = groupX + ((*it)->sx - (*it)->cx);
+            sy = groupY + ((*it)->sy - (*it)->cy);
+            double dx = sx-cx;
+            double dy = sy-cy;
+            double distance = sqrt(dx * dx + dy * dy);
+            moves = distance / speed;
+            ux = dx / moves;
+            uy = dy / moves;
+        }
+    
+        if(activity && moves > 0) {
+            moves--;
+            cx += ux;
+            cy += uy;
+        }
+        
+        // Hunting mode
+        this->hunting();
+        
+        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size+2, Color4F::YELLOW);
+        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
+        
+        this->createSight();
+    }
 }
 
 void Animal::createSight()

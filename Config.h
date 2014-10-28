@@ -65,8 +65,9 @@
 #define CL_NORAML_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(229, 0, 65))
 // Status Old
 #define CL_OLD_P cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(119, 135, 1))
-#define CL_OLD_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(33, 83, 124))
-#define CL_OLD_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(127, 0, 14))
+#define CL_OLD_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(39, 125, 142))
+#define CL_OLD_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(127, 24, 77))
+
 // Status Breeding
 #define CL_BREEDING_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(0, 177, 247))
 #define CL_BREEDING_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(255, 0, 195))
@@ -126,6 +127,18 @@ enum causeOfDeath
     naturalDeath,
     prey,
     starvation,
+};
+
+enum DNAType
+{
+    dBehavior,
+};
+
+enum behaviorType
+{
+    loneWolf,
+    collective,
+    laziness,
 };
 
 #endif

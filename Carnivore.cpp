@@ -33,6 +33,7 @@ Carnivore::Carnivore() {
 Carnivore::~Carnivore() {
     CCLOG("Carnivore is dead.");
     G->eraseTarget(this, G->breedingFemaleMap[type]);
+    G->eraseTarget(this, G->group[type]);
 }
 
 LivingThings* Carnivore::getInstance()

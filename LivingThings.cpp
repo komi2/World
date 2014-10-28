@@ -11,6 +11,8 @@ LivingThings::LivingThings() {
 
 LivingThings::~LivingThings() {}
 
+void LivingThings::behavior() {}
+
 void LivingThings::fatigueManage() {}
 
 void LivingThings::crossbreeding(LivingThings* L, LivingThings* tL) {}
@@ -26,6 +28,14 @@ void LivingThings::born(bool isBeginning)
         float radius = newL->size / 2;
         newL->cx = (rand() + (int)radius) % (int) (G->winSize.width - radius);
         newL->cy = (rand() + (int)radius) % (int) (G->winSize.height - radius);
+        
+        // Create chromosome
+        // Decide behavior type
+        newL->chromosome[dBehavior] = arc4random() % (sizeof(behaviorType)-1);
+        // If befavior type is collective, push data
+        if(newL->chromosome[dBehavior] == collective) {
+            G->group[newL->type].push_back(newL);
+        }
     } else {
         // Point of my parent
         newL->cx = cx;
@@ -51,6 +61,8 @@ void LivingThings::hunting() {}
 LivingThings* LivingThings::searchOperation() {}
 
 void LivingThings::randomWalk() {}
+void LivingThings::groupMove() {}
+void LivingThings::laze() {}
 
 void LivingThings::createDistination(bool isRandom)
 {

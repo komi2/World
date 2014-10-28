@@ -32,6 +32,7 @@ Herbivore::Herbivore() {
 
 Herbivore::~Herbivore() {
     G->eraseTarget(this, G->breedingFemaleMap[type]);
+    G->eraseTarget(this, G->group[type]);
     CCLOG("Herbivore is dead.");
 }
 
