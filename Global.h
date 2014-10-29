@@ -41,8 +41,6 @@ public:
     // Living Things Group visualize flag
     bool isGroupList[2];
     
-    bool isSearchingList[2];
-    
     // Window size
     cocos2d::Size winSize;
     
@@ -50,7 +48,6 @@ public:
     
     void switchVisual(int lType);
     void switchGroup(int lType);
-    void switchSearching(int lType);
     
     // Nearest search
     LivingThings* nearestSearch(LivingThings* L, std::list<LivingThings*> tL);

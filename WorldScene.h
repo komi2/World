@@ -42,7 +42,6 @@ public:
     void onMenuClosePressed(cocos2d::Ref* sender);
     void onVisualPressed(cocos2d::Ref* sender, int lType);
     void onGroupPressed(cocos2d::Ref* sender, int lType);
-    void onSearchingPressed(cocos2d::Ref* sender, int lType);
     
     // implement the "static create()" method manually
     CREATE_FUNC(World);

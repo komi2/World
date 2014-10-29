@@ -307,6 +307,7 @@ void Animal::laze()
 void Animal::groupMove()
 {
     std::list<LivingThings *>::iterator it = G->group[type].begin();
+    bool isLeader = false;
     
     // If pointer is group leader, random walk
     if(this == (*it)) {
@@ -327,6 +328,11 @@ void Animal::groupMove()
                     ++it;
                 }
             }
+        }
+        
+        isLeader = true;
+        if((G->isGroupList[type])) {
+            G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size+2, Color4F::YELLOW);
         }
     } else {
         if(groupX == 0 && groupY == 0) {
@@ -355,7 +361,7 @@ void Animal::groupMove()
     G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
     
     // Visualize group
-    if((G->isGroupList[type])) {
+    if((G->isGroupList[type]) && ! isLeader) {
         G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size-3, Color4F::YELLOW);
     }
     
@@ -382,11 +388,7 @@ void Animal::createSight()
     
     Color4F sightColor;
     if(G->isVisualList[type]) {
-        if(G->isSearchingList[type] && chromosome[dVision] == visSearching) {
-            sightColor = Color4F(1,1,0,0.2);
-        } else {
-            sightColor = Color4F(1,1,1,0.2);
-        }
+        sightColor = (chromosome[dVision] == visSearching) ? Color4F(1,1,0,0.2) : Color4F(1,1,1,0.2) ;
     } else {
         sightColor = Color4F(0,0,0,0);
     }

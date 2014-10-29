@@ -159,8 +159,6 @@ void World::createMenuItems(void)
     label.push_back( Label::createWithSystemFont("Visual: H", GAME_FONT, 50) );
     label.push_back( Label::createWithSystemFont("Group: C", GAME_FONT, 50) );
     label.push_back( Label::createWithSystemFont("Group: H", GAME_FONT, 50) );
-    label.push_back( Label::createWithSystemFont("Searching: C", GAME_FONT, 50) );
-    label.push_back( Label::createWithSystemFont("Searching: H", GAME_FONT, 50) );
     label.push_back( Label::createWithSystemFont("Retry", GAME_FONT, 50) );
     label.push_back( Label::createWithSystemFont("Close", GAME_FONT, 50) );
     
@@ -168,10 +166,8 @@ void World::createMenuItems(void)
     menuItem.push_back( MenuItemLabel::create(label.at(1), CC_CALLBACK_1(World::onVisualPressed,this, lTypeH)) );
     menuItem.push_back( MenuItemLabel::create(label.at(2), CC_CALLBACK_1(World::onGroupPressed,this, lTypeC)) );
     menuItem.push_back( MenuItemLabel::create(label.at(3), CC_CALLBACK_1(World::onGroupPressed,this, lTypeH)) );
-    menuItem.push_back( MenuItemLabel::create(label.at(4), CC_CALLBACK_1(World::onSearchingPressed,this, lTypeC)) );
-    menuItem.push_back( MenuItemLabel::create(label.at(5), CC_CALLBACK_1(World::onSearchingPressed,this, lTypeH)) );
-    menuItem.push_back( MenuItemLabel::create(label.at(6), CC_CALLBACK_1(World::onRetryPressed,this)) );
-    menuItem.push_back( MenuItemLabel::create(label.at(7), CC_CALLBACK_1(World::onMenuClosePressed,this)) );
+    menuItem.push_back( MenuItemLabel::create(label.at(4), CC_CALLBACK_1(World::onRetryPressed,this)) );
+    menuItem.push_back( MenuItemLabel::create(label.at(5), CC_CALLBACK_1(World::onMenuClosePressed,this)) );
     
     Menu* menuItems = Menu::create(
         menuItem.at(0),
@@ -180,13 +176,11 @@ void World::createMenuItems(void)
         menuItem.at(3),
         menuItem.at(4),
         menuItem.at(5),
-        menuItem.at(6),
-        menuItem.at(7),
         NULL
     );
 
     menuItems->alignItemsVerticallyWithPadding(50);
-    menuItems->setPosition(Vec2(_layerMenu->getContentSize().width/2, G->winSize.height - 430));
+    menuItems->setPosition(Vec2(_layerMenu->getContentSize().width/2, G->winSize.height - 330));
     _layerMenu->addChild(menuItems, zMenuItems);
     
 }
@@ -283,9 +277,4 @@ void World::onVisualPressed(Ref* sender, int lType)
 void World::onGroupPressed(Ref* sender, int lType)
 {
     G->switchGroup(lType);
-}
-
-void World::onSearchingPressed(Ref* sender, int lType)
-{
-    G->switchSearching(lType);
 }

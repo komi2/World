@@ -37,11 +37,6 @@ void Global::switchGroup(int lType)
     isGroupList[lType] = ( isGroupList[lType] ) ? false : true ;
 }
 
-void Global::switchSearching(int lType)
-{
-    isSearchingList[lType] = ( isSearchingList[lType] ) ? false : true ;
-}
-
 void Global::eraseTarget(LivingThings* L, std::list<LivingThings *> &tL)
 {
     std::list<LivingThings *>::iterator itTL = tL.begin();
