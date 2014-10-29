@@ -49,7 +49,9 @@ public:
     virtual LivingThings* getInstance();
     
     // Draw
-    void born(bool isBeginning);
+    LivingThings* born(bool isBeginning);
+    
+    virtual std::map<DNAType, int> genetic(LivingThings* L, LivingThings* tL);
     
     virtual void fatigueManage();
     

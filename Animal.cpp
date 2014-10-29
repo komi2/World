@@ -177,11 +177,27 @@ void Animal::crossbreeding(LivingThings* L, LivingThings* tL)
         L->createDistination(true);
         
         for(int i = 0; i < tL->breedableAmount; ++i) {
-            tL->born(false);
+            // Bear a child and genetic
+            tL->born(false)->chromosome = this->genetic(L, tL);
         }
         
         ++tL->breededAmount;
     }
+}
+
+std::map<DNAType, int> Animal::genetic(LivingThings* L, LivingThings* tL)
+{
+    int P = arc4random() % 1;
+    std::map<DNAType, int> nChromosome;
+    
+    int i = 1;
+    for (int DNATypeIt=0; DNATypeIt<sizeof(DNAType); DNATypeIt++) {
+        DNAType dnaType = static_cast<DNAType>(DNATypeIt);
+        nChromosome[dnaType] = (i%2 == P) ? L->chromosome[dnaType] : tL->chromosome[dnaType];
+        i++;
+    }
+    
+    return nChromosome;
 }
 
 void Animal::eat()

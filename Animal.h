@@ -32,6 +32,7 @@ public:
     int fatigue = 0;
     int breakSpan = arc4random() % (4000) + 1500;
     
+    std::map<DNAType, int> genetic(LivingThings* L, LivingThings* tL);
     void behavior();
     void fatigueManage();
     bool aging(std::list<LivingThings *>::iterator &itL);

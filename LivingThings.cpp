@@ -19,7 +19,7 @@ void LivingThings::crossbreeding(LivingThings* L, LivingThings* tL) {}
 
 void LivingThings::breeding() {}
 
-void LivingThings::born(bool isBeginning)
+LivingThings* LivingThings::born(bool isBeginning)
 {
     // New object
     LivingThings* newL = this->getInstance();
@@ -48,7 +48,11 @@ void LivingThings::born(bool isBeginning)
     
     // Push data
     G->L[newL->type].push_back(newL);
+    
+    return newL;
 }
+
+std::map<DNAType, int> LivingThings::genetic(LivingThings* L, LivingThings* tL) {}
 
 void LivingThings::eat() {}
 
