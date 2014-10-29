@@ -20,6 +20,7 @@ public:
     // Get instance
     LivingThings* getInstance();
     void hunting();
+    void search();
 };
 
 #endif

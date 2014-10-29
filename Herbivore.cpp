@@ -79,3 +79,15 @@ void Herbivore::hunting()
     sy = huntingTarget->cy;
     this->createDistination(false);
 }
+
+void Herbivore::search()
+{
+    std::list<LivingThings *>::iterator itE = G->L[lTypeC].begin();
+    while(itE != G->L[lTypeC].end()) {
+        if( G->hitCheckPointPolygon2d(Vec2(cx, cy), VR, VL, Vec2((*itE)->cx, (*itE)->cy)) ) {
+            this->createDistination(true);
+            break;
+        }
+        itE++;
+    }
+}

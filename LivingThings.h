@@ -57,6 +57,8 @@ public:
     
     virtual void behavior();
     
+    virtual void search();
+    
     // Aging
     virtual bool aging(std::list<LivingThings *>::iterator &itL);
     

@@ -13,6 +13,8 @@ LivingThings::~LivingThings() {}
 
 void LivingThings::behavior() {}
 
+void LivingThings::search() {}
+
 void LivingThings::fatigueManage() {}
 
 void LivingThings::crossbreeding(LivingThings* L, LivingThings* tL) {}
@@ -36,6 +38,9 @@ LivingThings* LivingThings::born(bool isBeginning)
         if(newL->chromosome[dBehavior] == collective) {
             G->group[newL->type].push_back(newL);
         }
+        
+        // Decide vision type
+        newL->chromosome[dVision] = arc4random() % (sizeof(visionType)-1);
     } else {
         // Point of my parent
         newL->cx = cx;

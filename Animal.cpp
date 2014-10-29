@@ -20,6 +20,7 @@ Animal::~Animal() {}
 
 void Animal::behavior()
 {
+    // Behavior
     switch (chromosome[dBehavior]) {
         case loneWolf:
             this->randomWalk();
@@ -38,6 +39,11 @@ void Animal::behavior()
             CCLOG("ERROR");
             exit(1);
             break;
+    }
+    
+    // Vision
+    if(chromosome[dVision] == visSearching) {
+        this->search();
     }
 }
 
@@ -304,7 +310,6 @@ void Animal::groupMove()
     
     // If pointer is group leader, random walk
     if(this == (*it)) {
-        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size+4, Color4F::YELLOW);
         if(activity){// && ! isBreakTime) {
             if(moves > 0) {
                 moves--;
@@ -323,13 +328,6 @@ void Animal::groupMove()
                 }
             }
         }
-        
-        // Hunting mode
-        this->hunting();
-        
-        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
-        
-        this->createSight();
     } else {
         if(groupX == 0 && groupY == 0) {
             groupX = arc4random() % 200 + ((*it)->cx-100);
@@ -349,15 +347,19 @@ void Animal::groupMove()
             cx += ux;
             cy += uy;
         }
-        
-        // Hunting mode
-        this->hunting();
-        
-        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size+2, Color4F::YELLOW);
-        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
-        
-        this->createSight();
     }
+    
+    // Hunting mode
+    this->hunting();
+
+    G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size, color);
+    
+    // Visualize group
+    if((G->isGroupList[type])) {
+        G->mainDrawNode[type]->drawDot(Vec2(cx, cy), size-3, Color4F::YELLOW);
+    }
+    
+    this->createSight();
 }
 
 void Animal::createSight()
@@ -378,7 +380,17 @@ void Animal::createSight()
     VR = Vec2(RX, RY);
     VL = Vec2(LX, LY);
     
-    Color4F sightColor = (G->isVisualList[type]) ? Color4F(1,1,1,0.2) : Color4F(0,0,0,0) ;
+    Color4F sightColor;
+    if(G->isVisualList[type]) {
+        if(G->isSearchingList[type] && chromosome[dVision] == visSearching) {
+            sightColor = Color4F(1,1,0,0.2);
+        } else {
+            sightColor = Color4F(1,1,1,0.2);
+        }
+    } else {
+        sightColor = Color4F(0,0,0,0);
+    }
+    
     
     G->visionDrawNode->drawTriangle(Vec2(cx, cy), VL, VR, sightColor);
 }

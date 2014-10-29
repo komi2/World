@@ -132,6 +132,7 @@ enum causeOfDeath
 enum DNAType
 {
     dBehavior,
+    dVision,
 };
 
 enum behaviorType
@@ -139,6 +140,12 @@ enum behaviorType
     loneWolf,
     collective,
     laziness,
+};
+
+enum visionType
+{
+    visNone,
+    visSearching,
 };
 
 #endif

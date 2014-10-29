@@ -38,12 +38,19 @@ public:
     // Living Things visual flag
     bool isVisualList[2];
     
+    // Living Things Group visualize flag
+    bool isGroupList[2];
+    
+    bool isSearchingList[2];
+    
     // Window size
     cocos2d::Size winSize;
     
     std::map<livingThingsType, std::list<LivingThings*>> breedingFemaleMap;
     
     void switchVisual(int lType);
+    void switchGroup(int lType);
+    void switchSearching(int lType);
     
     // Nearest search
     LivingThings* nearestSearch(LivingThings* L, std::list<LivingThings*> tL);
