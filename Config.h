@@ -69,6 +69,7 @@
 #define CL_OLD_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(127, 24, 77))
 
 // Status Breeding
+#define CL_BREEDING_P cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(182, 255, 0))
 #define CL_BREEDING_H cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(0, 177, 247))
 #define CL_BREEDING_C cocos2d::Color4F::Color4F(cocos2d::Color3B::Color3B(255, 0, 195))
 

@@ -111,6 +111,8 @@ void World::theCreation()
 // Game Loop
 void World::update(float delta)
 {
+    G->time++;
+    
     G->mainDrawNode[lTypeC]->clear();
     G->mainDrawNode[lTypeH]->clear();
     G->mainDrawNode[lTypeP]->clear();
@@ -144,6 +146,7 @@ void World::update(float delta)
     
     std::list<LivingThings *>::iterator itP = G->L[lTypeP].begin();
     while(itP != G->L[lTypeP].end()) {
+        (*itP)->breeding();
         
         if( (*itP)->aging(itP) ) continue;
         ++itP;

@@ -20,6 +20,9 @@ class Global
 public:
     Global();
     
+    // total frame
+    int time = 0;
+    
     // World scene
     cocos2d::Scene* world;
 

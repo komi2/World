@@ -17,13 +17,9 @@ public:
     Animal();
     ~Animal();
     
-    // Status color
-    cocos2d::Color4F cBreeding;
-    
     // Vector of sight
     cocos2d::Vec2 VL, VR;
     
-    LivingThings* breedingTarget;
     LivingThings* huntingTarget;
     
     // Viewing angle

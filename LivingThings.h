@@ -22,11 +22,14 @@ public:
     // Status color
     cocos2d::Color4F cNormal;
     cocos2d::Color4F cOld;
+    cocos2d::Color4F cBreeding;
     
     sexType sex;
     livingThingsType type, targetType;
     
     std::map<DNAType, int> chromosome;
+    
+    LivingThings* breedingTarget;
     
     // Point
     double moves, cx, cy, ux, uy, sx, sy;
