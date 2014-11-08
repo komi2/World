@@ -21,9 +21,6 @@ public:
     void createSight();
     void breeding();
     void crossbreeding(LivingThings* L, LivingThings* tL);
-    
-    // Get instance
-    LivingThings* getInstance();
 };
 
 #endif

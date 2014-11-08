@@ -48,9 +48,6 @@ public:
     // Node
     cocos2d::DrawNode* drawNode;
     
-    // Get instance
-    virtual LivingThings* getInstance();
-    
     // Draw
     LivingThings* born(bool isBeginning);
     

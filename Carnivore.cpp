@@ -36,11 +36,6 @@ Carnivore::~Carnivore() {
     G->eraseTarget(this, G->group[type]);
 }
 
-LivingThings* Carnivore::getInstance()
-{
-    return new Carnivore;
-}
-
 void Carnivore::hunting()
 {
     if( ! isHunting) {

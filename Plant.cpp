@@ -50,11 +50,14 @@ bool Plant::aging(std::list<LivingThings *>::iterator &itL)
 
 void Plant::breeding()
 {
+    int breedingSpan = endLife / 5;
+    
     // Breeding season flag
-    if(G->time % 3000 == 0) {
+    if(life == 0) {
+    } else if(life % breedingSpan == 0) {
         activity = false;
         color = cBreeding;
-    } else if(G->time % 3300 == 0) {
+    } else if(life % breedingSpan + 300 == 0) {
         activity = true;
         color = cNormal;
         breededAmount = 0;
@@ -130,8 +133,3 @@ void Plant::crossbreeding(LivingThings* L, LivingThings* tL)
 }
 
 void Plant::createSight() {}
-
-LivingThings* Plant::getInstance()
-{
-    return new Plant;
-}

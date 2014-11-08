@@ -16,9 +16,7 @@ class Carnivore : public Animal
 public:
     Carnivore();
     ~Carnivore();
-    
-    // Get instance
-    LivingThings* getInstance();
+
     void hunting();
 };
 

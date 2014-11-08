@@ -24,7 +24,7 @@ void LivingThings::breeding() {}
 LivingThings* LivingThings::born(bool isBeginning)
 {
     // New object
-    LivingThings* newL = this->getInstance();
+    LivingThings* newL = G->getMyInstance(type);
     
     if(isBeginning) {
         float radius = newL->size / 2;
@@ -186,9 +186,4 @@ void LivingThings::decomposition(LivingThings* L)
         G->mainDrawNode[lTypeP]->drawDot(Vec2(plant->cx, plant->cy), plant->size, plant->color);
         G->L[lTypeP].push_back(plant);
     }
-}
-
-LivingThings* LivingThings::getInstance()
-{
-    return NULL;
 }

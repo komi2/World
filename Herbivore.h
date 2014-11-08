@@ -17,8 +17,6 @@ public:
     Herbivore();
     ~Herbivore();
     
-    // Get instance
-    LivingThings* getInstance();
     void hunting();
     void search();
 };

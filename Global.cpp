@@ -8,6 +8,10 @@
 
 #include "Global.h"
 #include "LivingThings.h"
+#include "Carnivore.h"
+#include "Herbivore.h"
+#include "Plant.h"
+
 
 Global* G = new Global;
 
@@ -88,6 +92,23 @@ LivingThings* Global::nearestSearch(LivingThings* L, std::list<LivingThings*> tL
     }
     
     return nearestL;
+}
+
+LivingThings* Global::getMyInstance(livingThingsType lType)
+{
+    switch (lType) {
+        case lTypeC:
+            return new Carnivore;
+            
+        case lTypeH:
+            return new Herbivore;
+            
+        case lTypeP:
+            return new Plant;
+    }
+    
+    CCLOG("Exception Error: getMyInstance, type %d", lType);
+    exit(1);
 }
 
 Vec2 Global::sub_vector(cocos2d::Vec2 a, cocos2d::Vec2 b)

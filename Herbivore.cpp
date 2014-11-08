@@ -36,11 +36,6 @@ Herbivore::~Herbivore() {
     CCLOG("Herbivore is dead.");
 }
 
-LivingThings* Herbivore::getInstance()
-{
-    return new Herbivore;
-}
-
 void Herbivore::hunting()
 {
     if( ! isHunting) {

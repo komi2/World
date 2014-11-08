@@ -57,6 +57,8 @@ public:
     // Nearest search
     LivingThings* nearestSearch(LivingThings* L, std::list<LivingThings*> tL);
     
+    LivingThings* getMyInstance(livingThingsType lType);
+    
     // Check whether alive
     bool checkAlive(LivingThings* L, std::list<LivingThings*> tL);
     
