@@ -17,7 +17,6 @@ public:
     Plant();
     ~Plant();
     
-    std::map<DNAType, int> genetic(LivingThings* L, LivingThings* tL);
     bool aging(std::list<LivingThings *>::iterator &itL);
     void createSight();
     void breeding();

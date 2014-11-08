@@ -128,12 +128,14 @@ enum causeOfDeath
     naturalDeath,
     prey,
     starvation,
+    poisonDeath,
 };
 
 enum DNAType
 {
     dBehavior,
     dVision,
+    dVenom,
 };
 
 enum behaviorType
@@ -147,6 +149,16 @@ enum visionType
 {
     visNone,
     visSearching,
+};
+
+enum venomLevel
+{
+    venomZero,
+    venomOne,
+    venomTwo,
+    venomThree,
+    venomFour,
+    venomFive,
 };
 
 #endif

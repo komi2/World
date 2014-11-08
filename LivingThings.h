@@ -54,7 +54,7 @@ public:
     // Draw
     LivingThings* born(bool isBeginning);
     
-    virtual std::map<DNAType, int> genetic(LivingThings* L, LivingThings* tL);
+    void genetic(LivingThings* L, LivingThings* tL, LivingThings* &C);
     
     virtual void fatigueManage();
     
@@ -75,7 +75,7 @@ public:
     // Born plants
     void decomposition(LivingThings* L);
     
-    virtual void eat();
+    virtual bool eat(std::list<LivingThings *>::iterator &itL);
     
     virtual void hunting();
     

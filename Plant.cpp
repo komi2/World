@@ -103,7 +103,13 @@ void Plant::crossbreeding(LivingThings* L, LivingThings* tL)
     LivingThings* child = tL->born(false);
     
     // Bear a child and genetic
-    child->chromosome = this->genetic(L, tL);
+    this->genetic(L, tL, child);
+
+    // Have venom
+    if(child->chromosome[dVenom] > venomThree) {
+        child->cNormal = Color4F::Color4F(cocos2d::Color3B::Color3B(193, 0, 232));
+        child->color = Color4F::Color4F(cocos2d::Color3B::Color3B(193, 0, 232));
+    }
 
     child->cx = arc4random() % (int) (tL->cx+(tmp*2)) + (tL->cx-tmp);
     child->cy = arc4random() % (int) (tL->cy+(tmp*2)) + (tL->cy-tmp);
@@ -121,21 +127,6 @@ void Plant::crossbreeding(LivingThings* L, LivingThings* tL)
     G->mainDrawNode[type]->drawDot(Vec2(child->cx, child->cy), child->size, child->color);
     
     L->breededAmount++;
-}
-
-std::map<DNAType, int> Plant::genetic(LivingThings* L, LivingThings* tL)
-{
-    int P = arc4random() % 1;
-    std::map<DNAType, int> nChromosome;
-    
-    int i = 1;
-    for (int DNATypeIt=0; DNATypeIt<sizeof(DNAType); DNATypeIt++) {
-        DNAType dnaType = static_cast<DNAType>(DNATypeIt);
-        nChromosome[dnaType] = (i%2 == P) ? L->chromosome[dnaType] : tL->chromosome[dnaType];
-        i++;
-    }
-    
-    return nChromosome;
 }
 
 void Plant::createSight() {}

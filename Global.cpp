@@ -18,6 +18,12 @@ Global::Global()
     // Initialize
     isVisualList[lTypeC] = false;
     isVisualList[lTypeH] = false;
+    
+    for (int lTypeIt=0; lTypeIt<sizeof(livingThingsType); lTypeIt++) {
+        livingThingsType lType = static_cast<livingThingsType>(lTypeIt);
+        
+        geneticCounter[lType] = 0;
+    }
 }
 
 double Global::pythagoras(double mx, double my, double sx, double sy)

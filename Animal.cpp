@@ -184,29 +184,15 @@ void Animal::crossbreeding(LivingThings* L, LivingThings* tL)
         
         for(int i = 0; i < tL->breedableAmount; ++i) {
             // Bear a child and genetic
-            tL->born(false)->chromosome = this->genetic(L, tL);
+            LivingThings* child = tL->born(false);
+            this->genetic(L, tL, child);
         }
         
         ++tL->breededAmount;
     }
 }
 
-std::map<DNAType, int> Animal::genetic(LivingThings* L, LivingThings* tL)
-{
-    int P = arc4random() % 1;
-    std::map<DNAType, int> nChromosome;
-    
-    int i = 1;
-    for (int DNATypeIt=0; DNATypeIt<sizeof(DNAType); DNATypeIt++) {
-        DNAType dnaType = static_cast<DNAType>(DNATypeIt);
-        nChromosome[dnaType] = (i%2 == P) ? L->chromosome[dnaType] : tL->chromosome[dnaType];
-        i++;
-    }
-    
-    return nChromosome;
-}
-
-void Animal::eat()
+bool Animal::eat(std::list<LivingThings *>::iterator &itL)
 {
     std::list<LivingThings *>::iterator itTL = G->L[targetType].begin();
     while(itTL != G->L[targetType].end()) {
@@ -217,6 +203,15 @@ void Animal::eat()
         
         // Eat target prey
         if(distance < size * 2) {
+            
+            // Check have venom
+            if( ! this->checkVenom(chromosome[dVenom], (*itTL)->chromosome[dVenom]) ) {
+                G->eraseTarget(this, G->L[type]);
+                G->deathCounter[type][poisonDeath]++;
+                delete this;
+                CCLOG("poisonDeath");
+                return true;
+            }
             
             // Get nutrition
             nutrition += (*itTL)->nutrition / NUTRITION_DIV_POINT;
@@ -234,6 +229,36 @@ void Animal::eat()
         
         ++itTL;
     }
+    
+    return false;
+}
+
+bool Animal::checkVenom(int myLv, int targetLv)
+{
+    // Exception
+    if(type == lTypeC) return true;
+    
+    switch (targetLv - myLv) {
+        case 1:
+            // TODO
+            break;
+
+        case 2:
+            // TODO
+            break;
+            
+        case 3:
+            // TODO
+            break;
+            
+        // Die
+        case 4:
+        case 5:
+            return false;
+            break;
+    }
+    
+    return true;
 }
 
 void Animal::defecate()
@@ -309,9 +334,13 @@ void Animal::groupMove()
     std::list<LivingThings *>::iterator it = G->group[type].begin();
     bool isLeader = false;
     
+    if((*it)->chromosome[dBehavior] != collective) {
+        CCLOG("ぐうあああ");
+    }
+    
     // If pointer is group leader, random walk
     if(this == (*it)) {
-        if(activity){// && ! isBreakTime) {
+        if(1) {//activity){// && ! isBreakTime) {
             if(moves > 0) {
                 moves--;
                 cx += ux;

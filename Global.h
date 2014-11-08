@@ -35,6 +35,8 @@ public:
     
     std::map<livingThingsType, std::map<causeOfDeath, int>> deathCounter;
     
+    std::map<livingThingsType, int> geneticCounter;
+    
 //    std::map<livingThingsType, cocos2d::DrawNode*> visionDrawNode;
     cocos2d::DrawNode* visionDrawNode;
     

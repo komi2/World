@@ -41,6 +41,9 @@ LivingThings* LivingThings::born(bool isBeginning)
         
         // Decide vision type
         newL->chromosome[dVision] = arc4random() % (sizeof(visionType)-1);
+        
+        // Initialize venom level
+        newL->chromosome[dVenom] = venomZero;
     } else {
         // Point of my parent
         newL->cx = cx;
@@ -57,17 +60,70 @@ LivingThings* LivingThings::born(bool isBeginning)
     return newL;
 }
 
-std::map<DNAType, int> LivingThings::genetic(LivingThings* L, LivingThings* tL) {}
+void LivingThings::genetic(LivingThings* L, LivingThings* tL, LivingThings* &C)
+{
+    G->geneticCounter[type]++;
+    
+    int P = arc4random() % 1;
+    
+    int i = 1;
+    for (int DNATypeIt=0; DNATypeIt<sizeof(DNAType); DNATypeIt++) {
+        DNAType dnaType = static_cast<DNAType>(DNATypeIt);
+        C->chromosome[dnaType] = (i%2 == P) ? L->chromosome[dnaType] : tL->chromosome[dnaType];
+        i++;
+    }
+    
+    
+    if(G->geneticCounter[type] % 10 == 0) {
+        int selectedDNA = arc4random() % (sizeof(DNAType)-1);
+        
+        switch (selectedDNA) {
+            case dBehavior:
+                C->chromosome[dBehavior] = arc4random() % (sizeof(behaviorType)-1);
+                break;
+                
+            case dVision:
+                C->chromosome[dVision] = arc4random() % (sizeof(visionType)-1);
+                break;
+                
+            case dVenom:
+                C->chromosome[dVenom] = arc4random() % (sizeof(venomLevel)-1);
+                break;
+                
+            default:
+                CCLOG("Exception Error of Genetic: number is %d", selectedDNA);
+                exit(1);
+                break;
+        }
+    }
+    
+    // If befavior type is collective, push data
+    if(C->chromosome[dBehavior] == collective) {
+        G->group[C->type].push_back(C);
+    }
+}
 
-void LivingThings::eat() {}
+bool LivingThings::eat(std::list<LivingThings *>::iterator &itL)
+{
+    return NULL;
+}
 
-bool LivingThings::hunger(std::list<LivingThings *>::iterator &itL) {}
+bool LivingThings::hunger(std::list<LivingThings *>::iterator &itL)
+{
+    return NULL;
+}
 
-bool LivingThings::aging(std::list<LivingThings *>::iterator &itL) {}
+bool LivingThings::aging(std::list<LivingThings *>::iterator &itL)
+{
+    return NULL;
+}
 
 void LivingThings::hunting() {}
 
-LivingThings* LivingThings::searchOperation() {}
+LivingThings* LivingThings::searchOperation()
+{
+    return NULL;
+}
 
 void LivingThings::randomWalk() {}
 void LivingThings::groupMove() {}
@@ -132,4 +188,7 @@ void LivingThings::decomposition(LivingThings* L)
     }
 }
 
-LivingThings* LivingThings::getInstance(){}
+LivingThings* LivingThings::getInstance()
+{
+    return NULL;
+}

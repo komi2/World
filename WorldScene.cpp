@@ -124,9 +124,9 @@ void World::update(float delta)
     while(itC != G->L[lTypeC].end()) {
         (*itC)->breeding();
         (*itC)->behavior();
-        (*itC)->eat();
         (*itC)->fatigueManage();
         
+        if( (*itC)->eat(itC) ) continue;
         if( (*itC)->hunger(itC) ) continue;
         if( (*itC)->aging(itC) ) continue;
         ++itC;
@@ -136,9 +136,9 @@ void World::update(float delta)
     while(itH != G->L[lTypeH].end()) {
         (*itH)->breeding();
         (*itH)->behavior();
-        (*itH)->eat();
         (*itH)->fatigueManage();
         
+        if( (*itH)->eat(itH) ) continue;
         if( (*itH)->hunger(itH) ) continue;
         if( (*itH)->aging(itH) ) continue;
         ++itH;
