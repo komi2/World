@@ -26,6 +26,9 @@ LivingThings* LivingThings::born(bool isBeginning)
     // New object
     LivingThings* newL = G->getMyInstance(type);
     
+    // Add generation
+    newL->generation = generation + 1;
+    
     if(isBeginning) {
         float radius = newL->size / 2;
         newL->cx = (rand() + (int)radius) % (int) (G->winSize.width - radius);
@@ -67,9 +70,11 @@ void LivingThings::genetic(LivingThings* L, LivingThings* tL, LivingThings* &C)
     int P = arc4random() % 1;
     
     int i = 1;
-    for (int DNATypeIt=0; DNATypeIt<sizeof(DNAType); DNATypeIt++) {
+    for (int DNATypeIt=0; DNATypeIt<sizeof(DNAType)-1; DNATypeIt++) {
         DNAType dnaType = static_cast<DNAType>(DNATypeIt);
-        C->chromosome[dnaType] = (i%2 == P) ? L->chromosome[dnaType] : tL->chromosome[dnaType];
+        C->chromosome[dnaType] = (i%2 == P)
+        ? L->chromosome[dnaType]
+        : tL->chromosome[dnaType];
         i++;
     }
     

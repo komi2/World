@@ -18,7 +18,7 @@
 #define GAME_FONT "HiraKakuProN-W6"
 
 // Initial amount of Living Things
-#define INIT_AMOUNT_C 10
+#define INIT_AMOUNT_C 11
 #define INIT_AMOUNT_H 30
 #define INIT_AMOUNT_P 60
 
@@ -39,7 +39,7 @@
 #define MAX_LIFE_P 9000
 #define MIN_LIFE_H 4000
 #define MAX_LIFE_H 8000
-#define MIN_LIFE_C 5000
+#define MIN_LIFE_C 6500
 #define MAX_LIFE_C 8000
 
 // Living Things max~min nutrition

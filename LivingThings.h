@@ -37,6 +37,7 @@ public:
     
     float speed, normalSpeed, runningSpeed;
     
+    int generation = 0;
     int size, zOrder, life = 0, endLife, nutrition, eatingAmount, breededAmount, breedableAmount;
     
     bool isHunting = false,
